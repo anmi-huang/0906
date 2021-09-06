@@ -1,0 +1,25 @@
+@import '_starter';
+
+.index-livecam-blk {
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+    background: url(../images/index/bg-livecam-blk.jpg) no-repeat top center;
+    background-size: cover;
+    .bg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: -1;
+        width: 100%;
+        transform: translate(-50%,-50%);
+        &:after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background:rgba(#000,.5);
+            @include size(100%,100%);
+        }
+    }
+}

@@ -1,0 +1,35 @@
+@import '_starter';
+
+
+.header-wrapper {
+    border-top: 3px #46afd8 solid;
+    background-color: #d8f2ff;
+    box-shadow: 0 2px 4px rgba(#000,.25);
+    @include media-breakpoint-up(xl) {
+        border-top-width: 4px;
+    }
+}
+
+.header {
+    position: relative;
+
+    &:before {
+        content: "";
+        position: absolute;
+        background: linear-gradient(to right, #d8f2ff 0,rgba(#d8f2ff,0) 60px,rgba(#d8f2ff,0) 61px,rgba(#d8f2ff,0) 70%,#d8f2ff 80%),url(../images/global/bg-deco.png) no-repeat;
+        background-size: auto,auto 100%;
+        opacity: .5;
+        @include size(320px, 100%);
+    }
+    @include media-breakpoint-up(md) {
+        &:before{
+            width: 400px;
+        }
+    }
+    @include media-breakpoint-up(xl) {
+        &:before{
+            width: 640px;
+        }
+    }
+    
+}

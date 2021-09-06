@@ -1,0 +1,98 @@
+@import '_starter';
+
+.index-area-intro-blk {
+
+    &:before {
+        content: "";
+        display: block;
+        height: 496px;
+        margin: 0 -16px -96px -16px;
+        background: url(../images/index/map-mobile.png) top center no-repeat;
+        background-size: auto 496px;
+    }
+    .link-area {
+        
+        &:before{
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 6px 8px 6px;
+            border-color: transparent;
+            border-bottom-color: $secondary;
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            margin-left: -6px;
+        }
+    }
+    .link-area-01{
+        top: 248px;
+        left: calc(50% + 115px);
+    }
+    .link-area-02{
+        top: 395px;
+        left: calc(50% + 108px);
+    }
+    .link-area-03{
+        top: 275px;
+        left: calc(50% + 80px);
+        &:before{
+            top:auto;
+            bottom: -8px;
+            transform: rotate(180deg);
+        }
+    }
+    @include media-breakpoint-up(md) {
+        overflow: hidden;
+        position: relative;
+        z-index: 0;
+        height: 704px;
+        padding-top: 80px;
+        padding-right: calc(100% - 300px) !important;
+
+        &:before {
+            position: absolute;
+            top: 32px;
+            left: calc(50% + 20px);
+            height: 722px;
+            width: 1295px;
+            background: url(../images/index/map.png) top center no-repeat;
+            background-size: 100%;
+            z-index: -1;
+            margin: 0;
+            transform: translateX(-790px);
+        }
+        @for $i from 1 through 3 {
+            $num:padding-zero($i);
+            &.area-#{$num} {
+                &:before{
+                    background-image: url(../images/index/map-area-#{$num}.png);
+                }
+                .link-area-#{$num} {
+                    display: inline-flex !important;
+                }
+                
+            }
+        }
+        .desktop & {
+            .link-area {
+                display: none !important;
+            }
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        padding-right: calc(100% - 440px) !important;
+    }
+
+    @include media-breakpoint-up(xl) {
+        padding-left: calc(50% - 520px) !important;
+        padding-right: calc(50% + 100px) !important;
+
+        &:before {
+            transform: translateX(-700px);
+        }
+    }
+}

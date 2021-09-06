@@ -1,0 +1,92 @@
+@import '_starter';
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('../fonts/iconfont.eot');
+    src: url('../fonts/iconfont.eot?#iefix') format('eot'),
+        url('../fonts/iconfont.woff') format('woff'),
+        url('../fonts/iconfont.ttf') format('truetype'),
+        url('../fonts/iconfont.svg#iconfont') format('svg');
+}
+
+html,
+body {
+    width: 100%;
+}
+html{
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'PingFangTC-Semibold', 'Helvetica Neue', 'Helvetica', 'Segoe UI', Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, 'Microsoft JhengHei', sans-serif;
+    line-height: 1.5;
+    button,
+    select {
+        font-family: 'PingFang TC', 'Helvetica Neue', 'Helvetica', 'Segoe UI', Roboto,
+            Oxygen-Sans, Ubuntu, Cantarell, 'Microsoft JhengHei', sans-serif;
+    }
+}
+
+
+.focus-visible:focus {
+    box-shadow: 0 0 5px 0 #09f, 0 0 2px #09f inset;
+}
+
+.anchor-fix {
+    position: relative;
+    top: -50px;
+    display: block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+
+    @include at-breakpoint("desktop") {
+        top: -100px;
+
+        &:focus {
+            border: 0 !important;
+        }
+    }
+}
+
+.hide-switch {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    border: none;
+}
+
+
+.acc-show-at-focus {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50000;
+    display: block;
+    width: 0.063rem;
+    height: 0.063rem;
+    padding: 0;
+    margin: -0.063rem;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    color: #fff;
+
+    &:focus {
+        width: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        outline: 2px auto -webkit-focus-ring-color;
+    }
+}

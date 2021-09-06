@@ -1,0 +1,101 @@
+.trip-editor-panel {
+    @include display-flex;
+    @include flex-flow(column nowrap);
+    @include justify-content(flex-start);
+    @include align-items(center);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    z-index: 100;
+    background: #fff;
+    @include transition(transform .6s ease);
+    @include translateX(100%);
+    &.show {
+        @include translateX(0);
+    }
+    .tpa-header {
+        @include flex(0 0 48px);
+    }
+    .map-container {
+        width: 100%;
+        border-bottom: 1px #eee solid;
+        @include flex(0 0 160px);
+    }
+    .map {
+        width: 100%;
+        height: 160px;
+        .gmnoprint {
+            display: none;
+        }
+    }
+    .day-spot-list {
+        width: 100%;
+    }
+    .btn-add-spot {
+        position: fixed;
+        bottom: 40px;
+        right: 20px;
+        z-index: 100;
+    }
+    .btn-optimize {
+        position: fixed;
+        top: 205px;
+        right: 12px;
+        z-index: 1000;
+    }
+    @include at-breakpoint('tablet') {
+        @include transition(transform .8s);
+        height: calc(100vh - 31px);
+        .map-container {
+            @include flex(0 0 400px);
+        }
+        .map {
+            height: 400px;
+        }
+        .btn-add-spot {
+            bottom: 120px;
+            right: 40px;
+        }
+        .day-spot-list {
+            max-height: calc(100vh - 400px - 90px - 64px);
+        }
+    }
+}
+.day-tab-blk {
+    @include display-flex;
+    @include flex-flow(row nowrap);
+    @include justify-content(flex-start);
+    @include align-items(center);
+    width: 100%;
+    background: #eee;
+    border-top: 1px #eee solid;
+    border-bottom: 1px #eee solid;
+    height: 42px;
+    @include flex(0 0 42px);
+    .btn-day,
+    .btn-add-day,
+    .btn-remove-day
+    .btn-day-settings {
+        width: percentage(1/8);
+        @include flex(0 0 percentage(1/8));
+    }
+    .btn-day {
+        border-top: none;
+        border-bottom: none;
+    }
+    .btn-remove-day,
+    .btn-day-settings {
+        margin-left: auto;
+    }
+    .create-trip-content & {
+        background: none;
+        border: none;
+        .btn-day {
+            border: 1px #eee solid;
+            &:not(:last-child){
+                border-right: none;
+            }
+        }
+    }
+}

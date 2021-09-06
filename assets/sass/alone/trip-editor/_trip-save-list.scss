@@ -1,0 +1,31 @@
+.trip-save-list {
+    overflow: auto;
+    padding: 16px;
+    max-height: calc(100vh - 118px);
+    &.empty{
+        &:before{
+            content: attr(data-empty-hint);
+            padding: 40px 16px;
+            display: block;
+            text-align: center;
+            color: #888;
+            
+        }
+    }
+    .item {
+        border: 1px #ccc solid;
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+        &.recommend,
+        &.ui-hint{
+            border: none;
+        }
+        &.ui-hint{
+            text-align: right;
+        }
+    }
+    @include at-breakpoint('tablet') {
+        max-height:: calc(100vh - 80px);
+    }
+}

@@ -1,0 +1,143 @@
+@import "_starter";
+
+i.icon {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+
+    &:before {
+        line-height: 1 !important;
+        @extend %iconfont-base;
+
+        .ie & {
+            display: flex;
+            width: initial;
+            min-width: 16px;
+            flex-shrink: 0;
+        }
+    }
+}
+
+
+$list:('fb-share', 'twitter', 'line', 'duplicate', 'arrow-left', 'arrow-down', 'play', 'location');
+
+@each $var in $list {
+    .icon-#{$var}:before {
+        content: iconfont-char("#{$var}");
+    }
+}
+
+@for $i from 1 through 12 {
+    $num: padding-zero($i);
+
+    .icon-nav-#{$num}:before {
+        content: iconfont-char("nav-#{$num}");
+    }
+}
+
+@for $i from 1 through 8 {
+    $num: padding-zero($i);
+
+    .icon-fast-#{$num}:before {
+        content: iconfont-char("fast-#{$num}");
+    }
+}
+
+//天氣
+.icon-weather {
+    &:before {
+        content: iconfont-char("wt-01");
+    }
+}
+
+@for $i from 1 through 42 {
+    $num: padding-zero($i);
+
+    .wt-#{$num}:before {
+        content: iconfont-char("wt-#{$num}");
+    }
+}
+
+//紫外線
+$uv-colors: (#39b54a, #fbb03b, #f15a24, #db001b, #ae31ff);
+
+.icon-uv {
+    @for $i from 1 through 5 {
+        &.lv-#{$i} {
+
+            &:before,
+            ~.status {
+                color: nth($uv-colors, $i);
+            }
+        }
+    }
+}
+
+.icon-air {
+    position: relative;
+
+    &:before {
+        content: '';
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: url(../images/content/air-lv-1.svg) no-repeat center;
+        background-size: 100% auto;
+    }
+
+    @for $i from 1 through 6 {
+        &.lv-#{$i}:before {
+            background-image: url(../images/content/air-lv-#{$i}.svg);
+        }
+    }
+}
+
+.icon-bubble {
+    background: url(../images/content/bubble.svg) center top no-repeat;
+    background-size: auto 100%;
+
+    &:before {
+        content: counter(counter);
+    }
+}
+
+.icon-livecam-fill {
+    &:before {
+        content: '';
+        background: url(../images/content/livecam-fill.svg) center center no-repeat;
+        background-size: 100%;
+        @include size(40px, 40px);
+    }
+}
+
+.icon-facebook-color {
+    background: url(../images/global/fb-color.svg) no-repeat center;
+    background-size: 100%;
+}
+
+.icon-instagram-color {
+    background: url(../images/global/instagram-color.png) no-repeat center;
+    background-size: 100%;
+}
+
+.icon-counter:before {
+    content: counter(counter);
+    font-family: inherit !important;
+}
+
+.icon-google-map {
+    min-width: 24px;
+    min-height: 24px;
+    background: url(../images/content/google-maps.svg) no-repeat;
+    background-size: cover;
+}
+
+.icon-wc {
+    &:before {
+        content: '';
+        background: url(../images/content/wc.svg) center center no-repeat;
+        background-size: 100%;
+        @include size(26px, 26px);
+    }
+}

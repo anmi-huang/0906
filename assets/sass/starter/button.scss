@@ -1,0 +1,468 @@
+@import '_starter';
+
+[class*='btn-'] {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    //transition: color .3s, background-color .3s;
+}
+
+.btn-open-menu {
+    $line-color: $white;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border: none;
+    padding: 0 8px;
+    background: none;
+    transition: opacity .3s;
+
+    &:before,
+    &:after {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 4px;
+        background-color: $line-color;
+        content: '';
+        border-radius: 2px;
+    }
+
+    &:before {
+        margin-bottom: 6px;
+    }
+
+    &:after {
+        margin-top: 6px;
+    }
+
+    .line {
+        display: block;
+        width: 100%;
+        height: 4px;
+        background-color: $line-color;
+        position: relative;
+        border-radius: 2px;
+    }
+
+    .is-open & {
+        opacity: 0;
+    }
+}
+
+
+.btn-tour-plan {
+    position: relative;
+    background-color: transparent;
+
+    &:after {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        content: attr(data-nums);
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: -10px;
+        margin-right: -10px;
+        background: #e96b45;
+        color: #fff;
+        height: 24px;
+        width: 24px;
+        text-align: center;
+        border-radius: 50%;
+        text-indent: 0;
+        font-size: rem(12px);
+        transform: scale(.8);
+        transition: transform .3s $ease-func;
+    }
+
+    &[data-nums='0']:after {
+        transform: scale(0);
+    }
+
+    &.in-header {
+        position: absolute;
+        top: 40px;
+        right: 24px;
+    }
+
+    @include media-breakpoint-up(xl) {
+
+        &:hover,
+        &:focus {
+            background-color: $primary;
+
+            .icon {
+                color: #fff !important;
+            }
+        }
+    }
+
+}
+
+.btn-back-to-top {
+    display: block;
+    visibility: hidden;
+    position: fixed;
+    z-index: 100;
+    right: 20px;
+    bottom: 90px;
+    opacity: 0;
+    transform: translateY(200px);
+    transition: all .3s;
+
+
+    &.show {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-index-switch {
+    position: relative;
+    border: 1px #fff solid;
+    background: rgba(#000, .3);
+
+    &.act {
+        background: rgba($secondary, .8);
+    }
+
+    @include media-breakpoint-up(xl) {
+
+        &:not(.act):hover,
+        &:not(.act).focus-visible:focus {
+            background-color: rgba($secondary, .5);
+        }
+    }
+}
+
+.btn {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 8px;
+    text-decoration: none;
+    border-radius: .25rem;
+    border: 1px #e5efe6 solid;
+    color: $default;
+    transition: all .3s;
+    font-size: rem(18px);
+    background-color: $white;
+    
+    @include media-breakpoint-up(xl) {
+
+        &:not(.act):hover,
+        &:not(.act).focus-visible:focus {
+            background-color: lighten($secondary, 20);
+        }
+    }
+
+    &.disabled {
+        background: #eee !important;
+        color: #aaa;
+        pointer-events: none;
+    }
+    &.rounded-top{
+        border-radius: .25rem .25rem 0 0;
+    }
+}
+
+$arr:('primary':$primary, 'secondary':$secondary);
+
+@each $name,
+$color in $arr {
+    .btn-#{$name} {
+        color: #fff;
+        background-color: $color;
+        border: none;
+
+        @include media-breakpoint-up(xl) {
+
+            &:not(.act):hover,
+            &:not(.act).focus-visible:focus {
+                background-color: lighten($color, 5);
+            }
+        }
+    }
+
+    .btn-outline-#{$name} {
+        color: $color;
+        border-color: $color !important;
+
+        &.act {
+            color: #fff !important;
+            background-color: $color;
+        }
+
+        @include media-breakpoint-up(xl) {
+
+            &:not(.act):hover,
+            &:not(.act).focus-visible:focus {
+                color: $color;
+                background-image: none;
+                @if($name=='success'){
+                    background-color: lighten($color, 70);
+                } @else{
+                    background-color: lighten($color, 25);
+                }
+            }
+        }
+    }
+}
+
+.btn-close {
+    position: relative;
+    background: #fff;
+    @include size(48px, 48px);
+
+    .icon {
+        pointer-events: none;
+    }
+
+    @include media-breakpoint-up(xl) {
+
+        &:hover,
+        &.focus-visible:focus {
+            i.icon-close {
+                color: $secondary !important;
+            }
+        }
+    }
+}
+
+.btn-search,
+.btn-adv {
+    height: 40px;
+
+    @include media-breakpoint-down(sm) {
+        width: 40px;
+        font-size: 0;
+    }
+}
+
+.btn-select {
+    
+    &:before {
+        content: '';
+        display: block;
+        border: 1px $gray-400 solid;
+        border-radius: $border-radius;
+        margin-right: 8px;
+        background: #fff;
+        @include size(18px, 18px);
+    }
+
+    &.radio:before {
+        border-radius: 50%;
+    }
+
+    .hide-switch:checked+& {
+        border-color: $secondary;
+
+        &:before {
+            border-color: $secondary;
+            background: $secondary;
+            box-shadow: 0 0 0 3px #fff inset;
+        }
+    }
+}
+
+.btn-share {
+    opacity: .5;
+    color: #fff;
+    transition: opacity .3s;
+    font-size: 0;
+    outline: 0;
+    overflow: visible;
+
+    .icon-fb-share {
+        background: #35589d;
+    }
+
+    .icon-twitter {
+        background: #03aae6;
+    }
+
+    .icon-twitter {
+        background: #03aae6;
+    }
+
+    .icon-weibo {
+        background: #e70400;
+    }
+
+    .icon-line {
+        background: #00c700;
+    }
+
+    .icon-duplicate {
+        background: #737373;
+    }
+
+    &:hover,
+    &.focus-visible:focus {
+        opacity: 1;
+    }
+
+    .hint {
+        background: #2ba8e0;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        z-index: 2000;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(12px);
+        transition: all .3s;
+
+        &:before {
+            content: '';
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 5px 5px 0 5px;
+            border-color: transparent;
+            border-top-color: #2ba8e0;
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            margin-left: -5px;
+        }
+
+        .ja & {
+            width: 128px !important;
+            margin-left: -64px !important;
+        }
+    }
+
+    &.animate {
+        opacity: 1;
+
+        .hint {
+            animation: duplicate-hint 1s;
+        }
+    }
+}
+
+@keyframes duplicate-hint {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    30% {
+        opacity: 1;
+        transform: none;
+    }
+
+    60% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.btn-add-trip {
+    position: relative;
+    border: none;
+    background: none;
+    font-size: 0;
+
+    .no-js & {
+        display: none !important;
+    }
+
+    .icon-heart-fill {
+        color: rgba(#000, .4);
+    }
+
+    &:after {
+        color: #fff;
+    }
+
+    &.remove .icon-heart-fill {
+        color: #cf223f;
+    }
+
+    &.remove:hover,
+    &.remove.focus-visible {
+        .icon-heart-fill {
+            color: #cf223f;
+        }
+    }
+
+    .thumb-info-card+& {
+        top: 4px;
+        left: 100px;
+        z-index: 100;
+        position: absolute;
+    }
+
+    .tour-spot & {
+        right: auto;
+        left: 92px;
+        top: 24px;
+    }
+
+    .spot-info & {
+        background-color: $light;
+    }
+
+    @include media-breakpoint-up(md) {
+        .thumb-info-card+& {
+            top: 6px;
+            left: auto;
+            right: 24px;
+        }
+
+        .tour-spot & {
+            right: auto;
+            left: 104px;
+            top: 24px;
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        .tour-spot & {
+            right: auto;
+            left: 168px;
+            top: 24px;
+        }
+    }
+
+    @include media-breakpoint-up(xl) {
+
+        &:hover,
+        &.focus-visible {
+            .icon-heart-fill {
+                color: rgba(#cf223f, .6);
+            }
+        }
+    }
+}
+
+.btn-slideshow {
+    background: none !important;
+
+    &:before {
+        content: iconfont-char('play');
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        font-size: rem(18px);
+        line-height: 45px;
+        vertical-align: middle;
+        @extend %iconfont-base;
+    }
+
+    &.pause:before {
+        content: iconfont-char('pause');
+    }
+}
+

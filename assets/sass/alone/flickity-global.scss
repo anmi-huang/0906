@@ -1,0 +1,95 @@
+@import "starter";
+
+//flicker global style
+.flickity-enabled {
+    .flickity-page-dots {
+        bottom: -32px;
+    }
+
+    .flickity-page-dots .dot {
+        border: none;
+        opacity: 1;
+        background-color: rgba(#fff, .8);
+        width: 24px;
+        height: 4px;
+        margin: 0 4px !important;
+        border-radius: 0;
+        transition: background-color .3s;
+
+        &.is-selected {
+            background-color: $secondary;
+            opacity: 1;
+        }
+    }
+
+    @include media-breakpoint-up(xl) {
+        .flickity-page-dots {
+            bottom: -40px;
+        }
+    }
+}
+
+.dots-inside {
+    .flickity-page-dots {
+        bottom: 20px;
+    }
+}
+
+.flickity-enabled .flickity-prev-next-button {
+    &:before {
+        @extend %iconfont-base;
+    }
+
+    @include at-breakpoint('desktop') {
+        height: 48px;
+        width: 48px;
+        background: rgba(#fff, .3);
+        border-radius: .25rem;
+        transition: background .3s;
+
+        .arrow {
+            display: none;
+        }
+
+        &:before {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            content: iconfont-char('arrow-right');
+            font-size: rem(32px);
+            color: $white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(180deg);
+        }
+
+        &[disabled]:before {
+            color: $info;
+        }
+
+        &:not([disabled]):hover,
+        &:not([disabled]):focus {
+            background: $secondary;
+
+            &:before {
+                color: #fff;
+            }
+        }
+
+        &.previous {
+            left: 24px;
+        }
+
+        &.next {
+            right: 24px;
+
+            &:before {
+                transform: rotate(0deg);
+            }
+        }
+    }
+}

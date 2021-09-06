@@ -1,0 +1,69 @@
+@import '_starter';
+
+.index-fast-link-blk {
+    background: url(../images/index/bg-fast-link-blk-mobile.jpg) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 0;
+        padding-bottom: 7.4479166666667%;
+        background: url(../images/index/mountain-mask.svg) no-repeat top center;
+        background-size: 100% auto;
+        transform: translateY(-1px);
+    }
+
+    .link {
+        background-image: linear-gradient(170deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.2) 100%);
+        .icon{
+            opacity: .3;
+        }
+        &:before {
+            @include size(32px, 32px);
+            font-size: rem(32px);
+            margin-right: 4px;
+            opacity: .3;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        background-image: url(../images/index/bg-fast-link-blk-tablet.jpg);
+    }
+
+    @include media-breakpoint-up(xl) {
+        background-image: url(../images/index/bg-fast-link-blk-desktop.jpg);
+    }
+}
+
+.index-fast-link-list {
+    @include media-breakpoint-up(md) {
+        .item {
+            width: 20%;
+            flex: 0 0 20%;
+        }
+
+        .link {
+            border-radius: 50% !important;
+            @include size(136px, 136px);
+            transition: all .3s;
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        .link {
+            @include size(165px, 165px);
+
+            &:hover,
+            &.focus-visible:focus {
+                background: $secondary;
+
+                .icon {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

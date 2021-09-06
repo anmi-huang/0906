@@ -1,0 +1,53 @@
+.ui-hint-blk {
+	@include display-flex;
+	@include flex-flow(column nowrap);
+	@include justify-content(flex-start);
+	@include align-items(center);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 60px 0;
+	z-index: 10000;
+	@include background(linear-gradient(to bottom, #333 25%,rgba(#333,.25) 100%));
+	.teach{
+		display: block;
+		width: 210px;
+		margin-bottom: 20px;
+	}
+	.title{
+		@include display-flex;
+		@include flex-flow(row nowrap);
+		@include justify-content(center);
+		@include align-items(center);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 56px;
+		color: #fff;
+		
+		@include adjust-font-size-to(20px);
+	}
+	.btn-close{
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		//background:#fff;
+		//border: 1px #000 solid;
+		width: 30px;
+		height: 30px;
+		&:before,
+		&:after{
+			background: #fff;
+		}
+	}
+	@include at-breakpoint('tablet') {
+		.teach{
+			width: 400px;
+			margin-bottom: 0;
+			margin-top: 40px;
+		}
+	}
+}

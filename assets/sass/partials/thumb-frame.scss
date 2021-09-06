@@ -1,0 +1,35 @@
+@import '_starter';
+
+
+.thumb-frame {
+    position: relative;
+    background-image: linear-gradient(-35deg, #255559 0%, #528a88 100%);
+
+    .thumb {
+        object-fit: cover;
+        opacity: 0;
+        -webkit-filter: blur(5px);
+        filter: blur(5px);
+        transition: opacity .5s, filter .5s, -webkit-filter .5s, transform .3s;
+        background:center center no-repeat;
+        background-size: cover;
+        &.lazyloaded,
+        &.flickity-lazyloaded {
+            opacity: 1;
+            -webkit-filter: none;
+            filter: none;
+        }
+    }
+}
+.icon-youtube {
+    background: radial-gradient(ellipse at center, #fff, #fff 24px) no-repeat center center;
+    background-size: 0;
+    transition: all .3s;
+}
+a:hover .thumb-frame,
+a.focus-visible:focus .thumb-frame {
+    .icon-youtube {
+        color: #E62117 !important;
+        background-size: 24px 24px;
+    }
+}

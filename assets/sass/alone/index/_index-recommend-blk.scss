@@ -1,0 +1,46 @@
+@import '_starter';
+
+.index-recommend-blk {
+    background: url(../images/index/bg-recommend-blk-mobile.jpg) no-repeat top center;
+
+    .link {
+        height: 0;
+        padding-bottom: 100%;
+        background: url(../images/index/recommend-01.jpg);
+        background-size: cover;
+    }
+
+    .name {
+        @include scrimGradient(black, 'to top');
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        background-size: 100% 50%;
+    }
+
+    @for $i from 1 through 6 {
+        $num: padding-zero($i);
+
+        .link-#{$num} {
+            background-image: url(../images/index/recommend-#{$num}.jpg)
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        background-image:  linear-gradient(to bottom, transparent 310px, white 310px),url(../images/index/bg-recommend-blk-tablet.jpg);
+    }
+    @include media-breakpoint-up(lg) {
+        .link{
+            padding-bottom: 220px;
+        }
+    }
+    @include media-breakpoint-up(xl) {
+        .link{
+            padding-bottom: 300px;
+        }
+    }
+    @include media-breakpoint-up(xl) {
+        background-image:   linear-gradient(to bottom, transparent 400px, white 400px)url(../images/index/bg-recommend-blk-desktop.jpg), ;
+        background-attachment: scroll,fixed;
+        background-size: auto,cover;
+    }
+}

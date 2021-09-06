@@ -1,0 +1,23 @@
+.trip-plan-form{
+    padding: 16px;
+    .form-item{
+        &:not(:last-child){
+            margin-bottom: 16px;
+        }
+    }
+    .label{
+        display: block;
+        margin-bottom: 8px;
+        
+    }
+    .ipt-text{
+        width: 100%;
+        height: 40px;
+        padding: 0 16px;
+        border: 1px #ccc solid;
+        -webkit-appearance:none;
+        border-radius: 0;
+        
+        @include adjust-font-size-to(16px);
+    }
+}
