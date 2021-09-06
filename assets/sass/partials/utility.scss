@@ -310,9 +310,9 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
 /* ------------- */
 /* ------------- */
 
-.cgr {
-    color: #3F5D45;
-}
+// .cgr {
+//     color: #3F5D45;
+// }
 
 
 @mixin pad{
@@ -333,14 +333,9 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
      }
 }
 
-.list-color{
-    color:$light-green ;
-    background-color: $deep-green;
-}
-
 .list-group-item-action{
-    h5{ 
-    border: 1px solid  $light-green;
+    .border-color{ 
+    border:  $light-green;
     }
     .active{
      background-color: $light-green;
@@ -370,6 +365,7 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
        letter-spacing:5px;
    }
 }
+
 .page-list button{
     width: 58px;
     height: 58px;
@@ -399,4 +395,35 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
 .slogan{
      writing-mode: vertical-rl; 
      text-indent: -20px;
- }
+}
+
+.border-line{
+   border: 1px solid #EAF0ED !important;
+}
+
+.btn-cart-bg{
+    background-color: #EAF0ED !important;
+}
+
+.text-cart-font{
+    font-family: "PingFangTC-Light" !important;
+}
+
+.text-email-font{
+    font-family:"HelveticaNeue-Light" !important;
+}
+
+.text-footer-font{
+    font-family:"HelveticaNeue" !important;
+}
+
+.text-footer-reserved{
+    font-family:"Times" !important;
+}
+.input-email-color{
+    background-color: #FFE180 ;
+}
+
+.text-decoration-name{
+    text-decoration:none !important;
+}

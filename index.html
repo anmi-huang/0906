@@ -21,12 +21,12 @@
             <img class="d-none d-md-block" src="./img/logo-all-dark (2).svg" width="200px">
             <img class="d-block d-md-none" src="./img/logotype-lg-dark.svg" width="150px">
         </a>
-        <div class="d-flex">
-            <a href="#" class=" d-none d-md-block fz-md-18px text-decoration-none mr-6 my-auto cgr">首頁</a>
-            <a href="#" class=" d-none d-md-block fz-md-18px text-decoration-none mr-6 my-auto cgr">甜點</a>
-            <a href="#" class=" d-none d-md-block fz-md-18px text-decoration-none mr-6 my-auto cgr">登入</a>
-            <i class="fas fa-shopping-cart fz-26px fz-md-28px mr-1 cgr "></i>
-        </div>
+        <ul class="d-flex">
+           <li class="my-auto mr-6 "><a href="#" class=" d-none d-md-block fz-md-18px text-decoration-none text-primary">首頁</a></li>
+           <li class="my-auto mr-6 "><a href="#" class=" d-none d-md-block fz-md-18px text-decoration-none text-primary">甜點</a></li>
+           <li class="my-auto mr-6 "><a href="#" class=" d-none d-md-block fz-md-18px text-decoration-none text-primary">登入</a></li>
+           <li class="my-auto "><i class="fas fa-shopping-cart fz-26px fz-md-28px mr-1 text-primary "></i></li>
+        </ul>
     </nav>
     <!-- navbar end -->
         <header id="header">
@@ -34,69 +34,77 @@
         </header>
     </div>
     <div class="container ">
-        <div class="row">
+        <aside class="row">
+
+        </aside>
+        <div class="row mt-5 ">
             <!-- list -->
-            <div class="col-md-4 mt-5 ">
-                <div class="col-12  text-center px-0 py-0  ">
-                    <div class="list-group fz-16px fz-md-20px rounded-0 px-0 py-0" id="list-tab" role="tablist">
-                         <div class="list-group-item list-color py-2" href="#" role="tab" aria-controls="0"
-                           >甜點類別</div>
-                        <a class="list-group-item list-group-item-action " id="list-home-list"
-                            data-toggle="list" href="#" role="tab" aria-controls="1" style="text-decoration:none;">
-                            <h5 class="active py-1 cgr ">
+            <aside class="col-md-4">
+                    <ul class="list-group fz-16px fz-md-20px rounded-0 px-0 py-0 text-center" id="list-tab" role="tablist">
+                         <li class="list-group-item bg-primary text-secondary py-2 fz-20px fz-md-24px" href="#" role="tab" aria-controls="0"
+                           >甜點類別</li>
+                        <li><a class="list-group-item list-group-item-action text-decoration-none   " id="list-home-list"
+                            data-toggle="list" href="#" role="tab" aria-controls="1">
+                            <p class="active py-2 text-primary border-color border-line fz-20px fz-md-24px">
                                 所有甜點（48）
-                            </h5>
+                            </p>
                         </a>
-                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
-                            href="#" role="tab" aria-controls="2" style="text-decoration:none;">
-                              <h5 class="py-1 mb-0 cgr ">
+                        </li>
+                        <li><a class="list-group-item list-group-item-action text-decoration-none " id="list-profile-list" data-toggle="list"
+                            href="#" role="tab" aria-controls="2">
+                              <p class="py-2 mb-0 text-primary border-color border-line fz-20px fz-md-24px">
                                 本日精選（10）
-                            </h5>
+                              </p>
                         </a>
-                        <a class="list-group-item list-group-item-action " id="list-messages-list"
-                            data-toggle="list" href="#" role="tab" aria-controls="3" style="text-decoration:none;">
-                              <h5 class="py-1 mb-0 cgr ">人氣推薦（26）
-                            </h5>
+                        </li>
+                        <li> <a class="list-group-item list-group-item-action text-decoration-none " id="list-messages-list"
+                            data-toggle="list" href="#" role="tab" aria-controls="3">
+                              <p class="py-2 mb-0 text-primary border-color border-line fz-20px fz-md-24px">人氣推薦（26）
+                              </p>
                         </a>
-                        <a class="list-group-item list-group-item-action" id="list-settings-list"
-                            data-toggle="list" href="#" role="tab" aria-controls="4" style="text-decoration:none; ">
-                              <h5 class=" py-1 mb-0 cgr ">
-                                新品上市（12）
-                            </h5>
+                        </li>
+                        <li> <a class="list-group-item list-group-item-action text-decoration-none " id="list-messages-list"
+                            data-toggle="list" href="#" role="tab" aria-controls="3">
+                              <p class="py-2 mb-0 text-primary border-color border-line fz-20px fz-md-24px ">新品上市（12）
+                              </p>
                         </a>
-                    </div>
-                </div>
-            </div>
-            <!-- list end-->
+                        </li>
+                    </ul>
+            </aside>
+            <!-- list end -->
             <!-- product  -->
-            <div class="col-md-8 mt-5 ">
+            <div class="col-md-8 ">
                 <div  class="row" id="product-row"></div>
                 <div id="app">
                     <div class="row">
-                        <form class="col-12 col-sm-12 col-md-6 rounded-0 mb-3" v-for="(item, index) in products"
-                            :key="item.id">
-                            <div class="card">
-                                    <img class="card-img-top position-relative d-block w-100 mx-0 my-0" v-bind:src="item.imgUrl" style="border:solid 1px #EAF0ED;">
-                                    <div class="card-btn position-absolute ">
-                                        <button >
-                                            <i class="far fa-heart fz-22px cgr"></i>
-                                        </button>
-                                    </div>
-                                    <div class="card-img position-absolute fz-16px">
-                                        <span class=" fz-16px px-1 py-1 cgr">本日精選</span>
-                                    </div>
-                                
-                                <div class="d-flex text-center cgr ">
-                                    <div class="flex-grow-1 fz-22px fz-md-22px py-1 " style="font-family:PingFangTC-Light;border:solid 1px #EAF0ED;">
+                        
+                        <div class="col-md-6 mb-3  " v-for="(item, index) in products" :key="item.id">
+                            <ul class="card border-line">
+                               <a href="#" class="text-decoration-name">
+                                <li><img class="card-img-top position-relative d-block w-100 mx-0 my-0" v-bind:src="item.imgUrl"></li>
+                                 <li class="card-img position-absolute fz-16px">
+                                <span class=" fz-16px px-1 py-1 text-white ">本日精選</span>
+                                </li>
+                                <li class="d-flex text-center text-primary  ">
+                                    <div class="flex-grow-1 fz-18px fz-md-20px py-1 text-cart-font border-line border-right-0  " >
                                         {{item.itemName}}
                                     </div>
-                                    <div  class="flex-grow-1 fz-22px fz-md-20px py-1"  style="border:solid 1px #EAF0ED;">NT$ {{item.price}}</div>
+                                    <div class="flex-grow-1 fz-18px fz-md-20px py-1 border-line" >NT$ {{item.price}}</div>
+                                </li>
+                                <li>
+                                    <button class="fz-20px fz-md-24px text-center w-100 py-2 text-primary btn-cart-bg " type="submit" >
+                                        加入購物車
+                                    </button>
+                                </li>
+                               </a>
+                                <div class="card-btn position-absolute ">
+                                    <button >
+                                        <i class="far fa-heart fz-22px text-primary"></i>
+                                    </button>
                                 </div>
-                                <button class="fz-26px fz-md-26px text-center w-100 py-2 cgr " type="submit" style="background-color:#EAF0ED ;">
-                                    加入購物車
-                                </button>
-                            </div>
-                        </form>
+                            </ul>
+                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -104,12 +112,12 @@
         </div>
 
         <!-- page-list -->
-        <div class=" page-list d-flex justify-content-end" style="font-family: PingFangTC-Light">
-            <button href="#" class="btn justify-content-center  py-2"><img
+        <div class=" page-list d-flex justify-content-end text-cart-font">
+            <button href="#" class="btn justify-content-center  py-2 rounded-0"><img
                     src="https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/master/student-week1/arrow_left.png"
                     alt="">
             </button>
-            <button href="#" class="btn  justify-content-center text-white py-2 rounded-0  " style="background-color: #3F5D45;">1
+            <button href="#" class="btn  justify-content-center text-white py-2 rounded-0 bg-primary " >1
             </button>
             <button href="#" class="btn  justify-content-center py-2 rounded-0">2
             </button>
@@ -131,7 +139,7 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12 d-flex justify-content-center my-auto">
                             <img src="./img/logo-light.svg" alt=""class=" w-6 mr-1">
-                            <p class="fz-24px fz-md-28px my-auto" style="font-family: HelveticaNeue-Light;">
+                            <p class="fz-24px fz-md-28px my-auto text-email-font">
                                 訂閱你我的甜蜜郵件
                             </p>
                         </div>
@@ -140,7 +148,7 @@
                                 <div class="email position-relative">
                                     <input type="text">
                                 </div>
-                                <button type="button" class="btn rounded-0 " style="background-color: #FFE180;">
+                                <button type="button" class="btn rounded-0 border-0 input-email-color">
                                     <img src="https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/master/student-week1/arrow_forward-24px.png"
                                         alt="">
                                 </button>
@@ -150,27 +158,27 @@
                 </div>
             </div>
     
-            <div class="cgr py-4" style="background-color: #EAF0ED;" >
+            <div class="text-primary py-4 bg-secondary" >
                 <div class="container">
                     <div class="row justify-content-between">
                         <div class=" col-md-6 d-flex flex-column">
-                            <div class="mb-0">
+                            <ul class="mb-0">
                                 <div class="footer-logo pb-4">
                                     <a href="#"><img src="./img/logotype-lg-dark.svg" alt="" width="180px"></a>
                                 </div>
-                                <p style="font-family: HelveticaNeue;">07-1234-5678</p>
-                                <p style="font-family: HelveticaNeue;">sweetaste@email.com</p>
-                                <p style="font-family: HelveticaNeue;">800 高雄市新興區幸福路 520 號</p>
-                            </div>
+                                <li class="text-footer-font">07-1234-5678</li>
+                                <li class="text-footer-font">sweetaste@email.com</li>
+                                <li class="text-footer-font">800 高雄市新興區幸福路 520 號</li>
+                            </ul>
                             <div class="d-flex">
                                 <a class=" w-5 pl-0 pr-1 pt-2" href="#"><img src="./img/ic-line@.svg" alt=""></a>
                                 <a  class=" w-5 pr-1 pt-2" href="#"><img src="./img/ic-facebook.svg" alt=""></a>
                             </div>
                         </div>
 
-                        <div class=" col-md-6 d-flex flex-column ">
-                            <h4 class="slogan d-none d-md-block fz-18px fz-md-22px py-5 cgr">今天是個<span>——</span><br>吃甜點的好日子。</h4>
-                            <p class="text-sm-left text-md-right" style="font-family:Times;">© 2018 Sweetaste* All Rights Reserved</p>
+                        <div class=" col-md-6 d-flex flex-column">
+                            <h4 class="slogan d-none d-md-block fz-18px fz-md-22px py-6 text-primary">今天是個<span>——</span><br>吃甜點的好日子。</h4>
+                            <p class="text-sm-left text-md-right text-footer-reserved">© 2018 Sweetaste* All Rights Reserved</p>
                         </div>
                     </div>
                 </div>
@@ -191,7 +199,7 @@
     <!-- vue.min.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
-	<script src="./js/main.js"></script>
+	<script src="./js/app.min.js"></script>
     
 </body>
 </html>
