@@ -309,23 +309,6 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
 /* ------------- */
 /* ------------- */
 /* ------------- */
-
-// .cgr {
-//     color: #3F5D45;
-// }
-
-
-@mixin pad{
-    @media (min-width: 768px) and (max-width: 991px) {
-      @content;
-    }
-  }
-  @mixin mobile{
-    @media (max-width: 767px) {
-      @content;
-    }
-  }
-
 @include media-breakpoint-up(md){
     .footer-logo{
      margin-top: 25px;
@@ -334,34 +317,28 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
 }
 
 .list-group-item-action{
-    .border-color{ 
-    border:  $light-green;
-    }
     .active{
-     background-color: $light-green;
+     background-color: $secondary;
      }
 }
 
-.card-img-top {
-    height: 320px;
-    object-fit: cover;
-    @include pad {
-    height: 240px;
-    }
-}
-.card-btn {
+.btn-card {
     top: 20px;
     right: 18.35px;
 }
+.img-card {
+    height: 315px;
+    object-fit: cover;
+}
 
-.card-img {
+.text-card {
     top: 1px;
     left: 20px;
     span {
        font-family: PingFangTC;
        writing-mode: vertical-lr ;
-       background-color: $deep-green; 
-       color: $light-green;
+       background-color: $primary; 
+       color: $secondary;
        letter-spacing:5px;
    }
 }
@@ -369,7 +346,7 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
 .page-list button{
     width: 58px;
     height: 58px;
-    border-color: $light-green;
+    border-color: $secondary;
     }
 
 .email{
@@ -382,11 +359,11 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
         left: 15px;
         top: 50%;
         transform: translateY(-50%);
-        @include cgr; 
+        color: $primary;
       }
       input {
         text-indent: 45px;
-        background-color:$light-green;
+        background-color: $secondary ;
         width: 250px;
         height:50px;
       }
@@ -397,33 +374,24 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
      text-indent: -20px;
 }
 
-.border-line{
-   border: 1px solid #EAF0ED !important;
-}
-
-.btn-cart-bg{
-    background-color: #EAF0ED !important;
-}
-
-.text-cart-font{
+.ff-ping-fang-tc-light{
     font-family: "PingFangTC-Light" !important;
 }
+.ff-ping-fang-tc-semibold{
+    font-family: "PingFangTC-Semibold" !important;
+}
 
-.text-email-font{
+.ff-Helvetica-neue-light{
     font-family:"HelveticaNeue-Light" !important;
 }
 
-.text-footer-font{
+.ff-Helvetica-neue{
     font-family:"HelveticaNeue" !important;
 }
 
-.text-footer-reserved{
+.ff-time{
     font-family:"Times" !important;
 }
-.input-email-color{
-    background-color: #FFE180 ;
-}
-
-.text-decoration-name{
-    text-decoration:none !important;
+.bg-email{
+    background-color: #FFE180 !important;
 }
