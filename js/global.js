@@ -56,6 +56,11 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
             this.key = 'example-cart';
             this.itemList = [];
             this.initCart = function () {
+                const localDataString = localStorage.getItem(this.key);
+                if (localDataString) {
+                    this.itemList = JSON.parse(localDataString);
+                }
+                this.render();
             }
 
             this.addItem = function (pid, amount) {
@@ -63,6 +68,7 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                     return p.id == pid;
                 }); 
                 const item = {
+                imgUrl:product.imgUrl,   
                 itemName: product.itemName,
                 price: product.price,
                 pid: pid,
@@ -70,32 +76,53 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                 }; 
                 this.itemList.push(item);
                 console.log(this.itemList);
-                this.render();
-              
+                this.render();  
+            }
+
+            this.addItemCart = function (pid, amount) {
+        
             }
         
-            // 至購物車刪除於購物車內指定索引商品
+           
             this.deleteItem = function (i) {
                 this.itemList.splice(i, 1);
                 this.render();
             }
           
-            // 更新資料到localStorage
+            
             this.updateDataToStorage = function () {
                 const dataString = JSON.stringify(this.itemList);
                 localStorage.setItem(this.key, dataString);
             }
-            // 渲染購物車
+            
+            // 數字增加
+           this.adder=function (){
+	       var count=countnum.innerHTML;
+	       count=parseInt(count)+1;
+	       countnum.innerHTML=count;
+            }
+           this.minuser=function (){
+	       var count=countnum.innerHTML;
+	       if(count<=0){
+		    count=0;
+	       }else{
+		    count=parseInt(count)-1;
+	        } 	
+	         countnum.innerHTML=count;
+            }
+
             this.render = function () { 
                 this.updateDataToStorage();
-                const $cartList = $('#cart-list');
-                // const $cartOrder = $('#cart-order');
+
 
                 $("#cartNumber").html(`
                 <span class="cartNumber1"> 
                 ${this.itemList.length}
                  </span>`);
 
+                const $cartList = $('#cart-list');
+                const $cartOrder = $('#cart-order');
+                $cartList.empty();
                 //  小結 
                 let cartValue = 0;
                 // 總額
@@ -133,9 +160,8 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                                 <td>
                                    <div class="ff-ping-fang-tc-semibold py-1 px-3 text-center ">NT$ ${item.price}</div>
                                 </td>
-          
                                 <td>
-                                   <button data-item-index="${idx} ><img src="./img/trash.svg" alt="" class="w-2 "></button>
+                                   <button data-item-index="${idx}" ><img src="./img/trash.svg" alt="" class=" remove-btn w-2 "></button>
                                 </td>
                            </tr>
                     </tboby>
@@ -143,8 +169,25 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                     </div> `;
                    $cartList.append(tr);
                 });
-
-            
+                $cartOrder.html(
+                    `<table class="w-100">
+                        <p>訂單摘要</p>
+                        <hr>
+                        <tboby>
+                            <tr class=" ff-ping-fang-tc-light fz-16x fz-md-16px">
+                                <td>小計</td>
+                                <td class="text-right">NT$ ${cartValue} </td>
+                            </tr>
+                            <tr class=" ff-ping-fang-tc-light fz-16x fz-md-16px">
+                                <td>運費</td>
+                                <td class="text-right">NT ${fee} </td>
+                            </tr>
+                        </tboby>
+                        <tfoot class="fz-20x fz-md-20px ">
+                            <td class="pt-2">總計</td>
+                            <td class="pt-2 text-right">NT$ ${cartSum} </td>
+                        </tfoot>
+                    </table> `);
                  
             }
         }
@@ -160,13 +203,23 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
             cart.addItem(pid, amount);
         });
 
-        // 綁定新增商品至購物車的表單送出事件
         $(".add-item-tr").submit(function (e) {
         e.preventDefault();
         });
 
-        //動態綁定移除單一品項的點擊事件
-        
+        $("#cart-list").delegate('.remove-btn', 'click', function () {
+            let idx = $(this).attr('data-item-index');
+            idx = parseInt(idx);
+            cart.deleteItem(idx);
+    });
+       
+        $("#cart-list").delegate('.remove-btn', 'click', function () {
+        let idx = $(this).attr('data-item-index');
+        idx = parseInt(idx);
+        cart.deleteItem(idx);
+});
+
+
 });  
 
 
