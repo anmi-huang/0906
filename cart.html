@@ -3,11 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-	<title>product</title>
+	<title>cart</title>
      <!-- 使用font awesome -->
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	<link rel="stylesheet" href="assets/css/app.css?t=20210903" />
+   
 </head>
 <body>
     <div class="container">
@@ -27,75 +28,69 @@
            <li class="my-auto mr-6 "><a href="#" class=" d-none d-md-block  text-decoration-none text-primary">登入</a></li>
            <li class="my-auto ">
             <a href="./cart.html" class=" d-none d-md-block  text-decoration-none text-primary">
-               <i class="fas fa-shopping-cart fz-26px fz-md-28px mr-1 text-primary "></i>
-               <div id="cartNumber"></div>
-            </a>
-            </li>
-        </ul>
+                <i class="fas fa-shopping-cart fz-26px fz-md-28px mr-1 text-primary "></i>
+                <div id="cartNumber"></div>
+             </a>
+         </li>
+     </ul>
     </nav>
     <!-- navbar end -->
-        <header id="header">
-            <img class="w-100 mt-5 " src="./img/navbar-img.png" alt="">
-        </header>
     </div>
     <div class="container ">
-        <aside class="row">
-        </aside>
         <div class="row mt-5 ">
-            <!-- list -->
-            <aside class="col-md-4">
-                    <ul class="list-group text-center fz-20px fz-md-24px rounded-0 px-0 py-0 " id="list-tab" role="tablist">
-                         <li class="list-group-item bg-primary text-secondary py-2" href="#" role="tab" aria-controls="0"
-                           >甜點類別</li>
-                        <li>  
-                            <a class="list-group-item list-group-item-action text-decoration-none" id="list-home-list"data-toggle="list" href="#" role="tab" aria-controls="1">
-                                 <p class="active py-2 text-primary border border-secondary  py-2">所有甜點（48） </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="list-group-item list-group-item-action text-decoration-none" id="list-profile-list" data-toggle="list" href="#" role="tab" aria-controls="2">
-                                 <p class="text-primary border border-secondary py-2 mb-0 ">本日精選（10）</p>
-                        </a>
-                        </li>
-                        <li> 
-                            <a class="list-group-item list-group-item-action text-decoration-none " id="list-messages-list" data-toggle="list" href="#" role="tab" aria-controls="3">
-                                 <p class="text-primary border border-secondary  py-2 mb-0 ">人氣推薦（26）</p>
-                            </a>
-                        </li>
-                        <li> 
-                            <a class="list-group-item list-group-item-action text-decoration-none " id="list-messages-list" data-toggle="list" href="#" role="tab" aria-controls="3">
-                                  <p class="text-primary border border-secondary py-2 mb-0 ">新品上市（12）</p>
-                             </a>
-                        </li>
-                    </ul>
-
-            </aside>
-            <!-- list end -->
-            <!-- product  -->
-            <div class="col-md-8 ">
-                <div  class="row" id="product-row"></div>
+              <!-- product  -->
+            <div class="col-md-8  ">
+                 <div class="bg-secondary text-center text-primary py-2 px-auto fz-24x fz-md-24px mb-4">
+                  你的購物車
+                 </div>
+                 <div  class="row" id="cart-list"></div>
             </div>
             <!-- product end -->
-        </div>
+            <!-- list -->
 
-        <!-- page-list -->
-        <div class=" page-list d-flex justify-content-end ">
-            <button href="#" class="btn   py-2 rounded-0 "><img
-                    src="https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/master/student-week1/arrow_left.png"
-                    alt="">
-            </button>
-            <button href="#" class="btn   text-white py-2 rounded-0 bg-primary " >1
-            </button>
-            <button href="#" class="btn  py-2 rounded-0 ">2
-            </button>
-            <button href="#" class="btn   py-2 rounded-0 ">3
-            </button>
-            <button href="#" class="btn   py-2 rounded-0" ><img
-                    src="https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/master/student-week1/arrow_right.png"
-                    alt="">
-            </button>
+
+            <aside class="col-md-4 ff-ping-fang-tc-semibold">
+                <div class="bg-primary text-secondary text-center px-2 py-2 fz-24x fz-md-24px "> 
+                    div#cart-order
+                    <!-- <table  class="w-100 " >
+                        <p>訂單摘要</p>
+                        <hr>
+                        <tboby>
+                            <tr class=" ff-ping-fang-tc-light fz-16x fz-md-16px">
+                                <td>小計</td>
+                                <td class="text-right">NT$ ${cartValue} </td>
+                            </tr>
+                            <tr class=" ff-ping-fang-tc-light fz-16x fz-md-16px">
+                                <td>運費</td>
+                                <td class="text-right">NT ${fee} </td>
+                            </tr>
+                        </tboby>
+                        <tfoot class="fz-20x fz-md-20px ">
+                            <td class="pt-2">總計</td>
+                            <td class="pt-2 text-right">NT$ ${cartSum} </td>
+                        </tfoot>
+                    </table>   -->
+                </div>
+                <div class="bg-yellow  text-center py-2 fz-24x fz-md-24px  ff-ping-fang-tc-semibold">
+                    <a href="#" class="text-primary text-decoration-none ">
+                        結帳
+                    </a>
+                </div>
+                <ul class="counter">
+                    <li id="minus"><input type="button" onclick="minuser()" value="-"/></li>
+                    <li id="amount${product.id}"class="countnum">1</li>
+                    <li id="plus"><input type="button" onclick="adder()" value="+"/></li>
+                </ul>
+                <!-- <button class=" border border-right-0 text-center button-hover">-
+                </button>
+                <button  id=""amountInput${product.id} class="border border-right-0 text-center ">1
+                   </button>
+                <button class=" border text-center button-hover ">+
+                </button>   -->
+              
+            </aside>
+            <!-- list end -->
         </div>
-        <!-- page-list end-->
 
     </div>
         <!-- footer -->
@@ -112,7 +107,7 @@
                                 <div class="email position-relative">
                                     <input type="text">
                                 </div>
-                                <button type="button"  class="btn bg-yellow rounded-0 border-0  ">
+                                <button type="button" class="btn bg-email rounded-0 border-0  ">
                                     <img src="https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/master/student-week1/arrow_forward-24px.png"
                                         alt="">
                                 </button>
@@ -159,8 +154,9 @@
     <!-- bootstrap.min.js -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>	
-    <script src="./js/global.js"></script>
+        crossorigin="anonymous"></script>
+
+	<script src="./js/global.js"></script>
     
 </body>
 </html>
