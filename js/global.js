@@ -1,6 +1,6 @@
 let productsData
 const productRow = document.querySelector('#product-row')
-const countnum = document.querySelector('.countnum')
+const countnum = document.querySelector('#countnum')
 
 
 
