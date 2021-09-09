@@ -90,7 +90,7 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
 
                 this.render(); 
             }
-               
+
             this.deleteItem = function (i) {
                 this.itemList.splice(i, 1);
                 this.render();
@@ -213,11 +213,11 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
             cart.deleteItem(idx);
     });
        
-        $("#btn-list-adder").delegate('click', function () {
-        const btnAdderId = $(this).attr("data-cart-adder")
-        let amount = 1; 
-        cart.btnAddItem(btnAdderId, amount);
-        });
+        // $("#btn-list-adder").delegate('click', function () {
+        // const btnAdderId = $(this).attr("data-cart-adder")
+        // let amount = 1; 
+        // cart.btnAddItem(btnAdderId, amount);
+        // });
 
 //     $("#btn-list-minuser").delegate('click', function () {
 //       const btnMinuseId = $(this).attr("data-cart-minuser")
