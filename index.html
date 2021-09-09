@@ -17,19 +17,23 @@
         <button class="d-block d-md-none">
             <img class="w-4 ml-1" src="./img/line.png">
         </button>
-        <a href="#"class="navbar-brand mr-0">
+        <a href="./index.html"  class="navbar-brand mr-0">
             <img class="d-none d-md-block" src="./img/logo-all-dark (2).svg" width="200px">
             <img class="d-block d-md-none" src="./img/logotype-lg-dark.svg" width="150px">
         </a>
         <ul class="d-flex fz-md-16px ">
-           <li class="my-auto mr-6 "><a href="./index.html" class=" d-none d-md-block  text-decoration-none text-primary">首頁</a></li>
-           <li class="my-auto mr-6 "><a href="#" class=" d-none d-md-block  text-decoration-none text-primary">甜點</a></li>
-           <li class="my-auto mr-6 "><a href="#" class=" d-none d-md-block  text-decoration-none text-primary">登入</a></li>
-           <li class="my-auto ">
-            <a href="./cart.html" class=" d-none d-md-block  text-decoration-none text-primary">
-               <i class="fas fa-shopping-cart fz-26px fz-md-28px mr-1 text-primary "> <div id="cartNumber"></div>s</i>
-            </a>
-            </li>
+            <li class="my-auto mr-6  d-none d-md-block "><a href="./index.html" class="  text-decoration-none text-primary">首頁</a></li>
+            <li class="my-auto mr-6  d-none d-md-block  "><a href="#" class=" d-none d-md-block  text-decoration-none text-primary">甜點</a></li>
+            <li class="my-auto mr-6 d-none d-md-block  "><a href="#" class="  text-decoration-none text-primary">登入</a></li>
+            <li class="my-auto ">
+                <div class=" text-decoration-none text-primary position-relative">
+                 <a href="./cart.html">
+                     <i  class="fas fa-shopping-cart fz-26px fz-md-28px mr-1 text-primary">
+                         <div id="cart-number"></div>
+                     </i>
+                  </a> 
+                </div>
+          </li>
         </ul>
     </nav>
     <!-- navbar end -->
@@ -38,8 +42,6 @@
         </header>
     </div>
     <div class="container ">
-        <aside class="row">
-        </aside>
         <div class="row mt-5 ">
             <!-- list -->
             <aside class="col-md-4">
@@ -67,12 +69,11 @@
                              </a>
                         </li>
                     </ul>
-
             </aside>
             <!-- list end -->
             <!-- product  -->
             <div class="col-md-8 ">
-                <div  class="row" id="product-row"></div>
+                <ul class="row" id="product-row"></ul>
             </div>
             <!-- product end -->
         </div>
@@ -95,7 +96,6 @@
             </button>
         </div>
         <!-- page-list end-->
-
     </div>
         <!-- footer -->
         <footer id="footer" class="mt-3">
