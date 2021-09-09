@@ -2,6 +2,7 @@ let productsData
 const productRow = document.querySelector('#product-row')
 
 
+
 function createProductCard(product) {
     const cardElement=`
     <li class="col-md-6 mb-3">
@@ -18,13 +19,9 @@ function createProductCard(product) {
            <div class="flex-grow-1  ff-ping-fang-tc-semibold border-secondary border border-right-0 py-1 ">NT$ ${product.price}</div>
         </div>
     </a>
-   <form data-product-id="${product.id}" class="add-item-tr" >
-        <div class="fz-22px fz-md-28px">
-        <button id="btn-product-row'" class="btn-add bg-secondary text-center text-primary w-100 py-2"id="btn-cart" type="submit">
-            加入購物車
-        </button>
-        </div>
-    </form>
+    	<button data-product-id="${product.id}" class=" add-item-tr fz-22px fz-md-28px btn-add bg-secondary text-center text-primary w-100 py-2"id="btn-cart" >
+    			加入購物車
+    		</button>
         <div class="btn-card position-absolute">
           <button >
             <i class="far fa-heart fz-22px text-primary"></i>
@@ -74,20 +71,18 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                 this.render();  
             }
            
-            this.btnAddItem = function (pid, amount) {
-                const product=productsData[pid]
-                product==pid
-                amount+=1
-                this.render();  
+            this.btnAddItem = function (i) {
+                this.itemList[i].amount+=1
+                this.render(); 
             }
 
-            this.minuserItemCart = function (pid,amount) {
-                const product=productsData[pid]
-                product==pid
-                product.amount
-                product.amount=parseInt(amount)+1;
-                countnum.innerHTML=amount;
-
+            this.btnMinuserItem = function (i) {
+                if(this.itemList[i].amount<=1){
+                    this.itemList[i].amount=1;
+                }else{
+                    this.itemList[i].amount-=1  
+                }
+                console.log(this.itemList[i].amount)	
                 this.render(); 
             }
 
@@ -103,8 +98,7 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
             }
             
             this.render = function () { 
-                this.updateDataToStorage();
-
+            this.updateDataToStorage();
 
                 $("#cart-number").html(`
                 <span class="cart-number-size position-absolute text-center text-primary bg-secondary fz-24"> 
@@ -116,15 +110,13 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
 
                 $cartList.empty();
 
-            
                 let cartValue = 0;
                 // 總額
                 let cartSum = 0;
                 //運費300
                 let fee=300;
-                 
+                // console.log("1",this.itemList[0].amount+1);
                 this.itemList.forEach(function (item, idx) {
-
                     console.log(item);
                     const itemValue = item.price * item.amount
                     cartValue += itemValue;
@@ -142,14 +134,15 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                                <li class="ff-Helvetica-neue-regular ">NT$ ${item.price}</li>
                              </ul> 
                             <div class="col-md-6 d-flex ay-auto button-list">
-                               <button id="btn-list-adder" data-cart-adder="${item.pid}" class=" ff-ping-fang-tc-light  border border-right-0 text-center button-hover">-</button>
-                               <button  class="ff-ping-fang-tc-light border border-right-0 text-center ">${item.amount}</button>
-                               <button id="btn-list-minuser" data-cart-minuser="${item.pid}" class="ff-ping-fang-tc-light border text-center  button-hover ">+</button>
+                            <button  data-cart-minuser="${idx}" class=" minuser ff-ping-fang-tc-light border text-center  button-hover ">-</button>
+                            <button  class="ff-ping-fang-tc-light border border-right-0 text-center ">${item.amount}</button>
+                               <button  data-cart-adder="${idx}" class=" adder ff-ping-fang-tc-light  border text-center button-hover">+</button>
+                              
                             </div>   
                     </div>
                     <div class="col-12 col-md-3 d-flex "> 
                              <div class="border-price col-md-10 fz-20px py-1  border border-secondary border-right-0 border-left-0  text-right text-md-left ">
-                               NT$ ${item.price}
+                               NT$ ${itemValue}
                              </div>
                              <button class="col-md-2 d-none d-md-block text-right " data-item-index="${idx}"><img src="./img/trash.svg" alt=""class="remove-btn w-2">
                              </button>
@@ -161,7 +154,7 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                 });
                 $cartOrder.html(
                     `
-                    <div class="order-list ">
+                 <div class="order-list ">
                     <div class="px-2 pb-2">
                       <div class="text-center text-primary py-2 px-auto fz-24px  bg-order">
                       訂單摘要
@@ -187,7 +180,7 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                             結帳
                             </a>
                          </div>
-                    </div> 
+                </div> 
                     `);
                  
             }
@@ -196,14 +189,23 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
         const cart = new Cart();
                 cart.initCart();
   
-        $('#product-row form').submit(function(e){
+        // $('#product-row form').submit(function(e){
+        //     e.preventDefault();
+        //     const pid = $(this).attr("data-product-id");
+        //     let amount = 1;
+        //     cart.addItem(pid, amount);
+        // });
+        
+
+        $("#product-row button").click(function(e){
             e.preventDefault();
             const pid = $(this).attr("data-product-id");
             let amount = 1;
-            cart.addItem(pid, amount);
+            cart.addItem(pid,amount);
+    
         });
 
-        $(".add-item-form").click(function (e) {
+        $(".add-item-tr").click(function (e) {
             e.preventDefault();
         });
       
@@ -211,21 +213,19 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
             let idx = $(this).attr('data-item-index');
             idx = parseInt(idx);
             cart.deleteItem(idx);
-    });
+         });
        
-        // $("#btn-list-adder").delegate('click', function () {
-        // const btnAdderId = $(this).attr("data-cart-adder")
-        // let amount = 1; 
-        // cart.btnAddItem(btnAdderId, amount);
-        // });
+        $("#cart-list").delegate('.adder','click', function () {
+            let idx = $(this).attr('data-cart-adder');
+            idx = parseInt(idx);
+            cart.btnAddItem(idx);
+        });
 
-//     $("#btn-list-minuser").delegate('click', function () {
-//       const btnMinuseId = $(this).attr("data-cart-minuser")
-//       let amount = 1; 
-//       cart.minuserItemCart(btnMinuseId, amount);
-//   });
-
-
+        $("#cart-list").delegate('.minuser','click', function () {
+            let idx = $(this).attr('data-cart-minuser');
+            idx = parseInt(idx);
+            cart.btnMinuserItem(idx);
+        });
 });  
 
 
