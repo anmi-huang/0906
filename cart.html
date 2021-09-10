@@ -13,14 +13,14 @@
 <body>
     <div class="container">
       <!-- navbar -->
-      <nav class="navbar d-flex justify-content-between h-4 mt-5 ">
+      <nav class="navbar d-flex justify-content-between h-4 mt-4 ">
         <!-- 手機版切換導覽列顯示按鈕 -->
         <button class="d-block d-md-none">
             <img class="w-4 ml-1" src="./img/line.png">
         </button>
-        <a href="./index.html"class="navbar-brand mr-0">
-            <img class="d-none d-md-block" src="./img/logo-all-dark (2).svg" width="200px">
-            <img class="d-block d-md-none" src="./img/logotype-lg-dark.svg" width="150px">
+        <a href="./index.html"  class="navbar-brand d-flex">
+            <img class="d-none d-md-block" src="./img/logo-all-dark (2).svg" width="170px">
+            <img class="d-block d-md-none" src="./img/logotype-lg-dark.svg" width="114px">
         </a>
         <ul class="d-flex fz-md-16px ">
            <li class="my-auto mr-6  d-none d-md-block "><a href="./index.html" class="  text-decoration-none text-primary">首頁</a></li>
@@ -29,7 +29,7 @@
            <li class="my-auto ">
                <div class=" text-decoration-none text-primary position-relative">
                 <a href="./cart.html">
-                    <i  class="fas fa-shopping-cart fz-26px fz-md-28px mr-1 text-primary">
+                    <i  class="fas fa-shopping-cart fz-26px fz-md-28px mr-1 text-primary ">
                         <div id="cart-number"></div>
                     </i>
                  </a> 
@@ -44,22 +44,17 @@
     </div>
     
     <div class="container ">
-        <div class="row mt-5  ">
-              <!-- product  -->
-              <div class="col-md-8">
-                <div class="d-none d-md-block  bg-secondary text-center text-primary py-2 px-auto fz-24px mt-2">
+        <div class=" row mt-5  ">
+            <!-- cart-list  -->
+            <div class="col-md-8">
+                <div class="d-none d-md-block  bg-secondary text-center text-primary mb-4 py-2 px-auto fz-24px ">
                     您的購物車
                 </div>
-                <ul  class="row" id="cart-list"></ul>
+                <ul id="cart-list"></ul>
             </div>
-            <!-- product end -->
-            <!-- list -->
-            <aside class="col-md-4 ff-ping-fang-tc-semibold">
-                <div class="text-primary text-center px-2 py-2 fz-24px "> 
-                    <div id="cart-order"></div>
-                </div>
+            <!-- cart-list end -->
+            <aside id="cart-order" class="col-md-4 ff-ping-fang-tc-semibold text-primary text-center fz-24px">
             </aside>
-            <!-- list end -->
         </div>
     </div>
         <!-- footer -->
@@ -118,6 +113,7 @@
             </div>
         </footer>
         <!-- footer end-->
+
     <!-- jquery.min.js -->
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
     </script>

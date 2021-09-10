@@ -3,7 +3,7 @@ const productRow = document.querySelector('#product-row')
 
 
 
-function createProductCard(product) {
+function createProductCard(product,index) {
     const cardElement=`
     <li class="col-md-6 mb-3">
     <div class="card border border-secondary">
@@ -19,7 +19,7 @@ function createProductCard(product) {
            <div class="flex-grow-1  ff-ping-fang-tc-semibold border-secondary border border-right-0 py-1 ">NT$ ${product.price}</div>
         </div>
     </a>
-    	<button data-product-id="${product.id}" class=" add-item-tr fz-22px fz-md-28px btn-add bg-secondary text-center text-primary w-100 py-2"id="btn-cart" >
+    	<button data-product-id="${index}" class=" add-item-tr fz-22px fz-md-28px btn-add bg-secondary text-center text-primary w-100 py-2"id="btn-cart" >
     			加入購物車
     		</button>
         <div class="btn-card position-absolute">
@@ -37,8 +37,8 @@ function createProductCard(product) {
 fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
         productsData = products
         let str=" "
-        productsData.forEach(product => {
-            const card =createProductCard(product)
+        productsData.forEach((product,index) => {
+            const card =createProductCard(product,index)
             str+=card
         });
         if(productRow){
@@ -56,18 +56,25 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                 }
                 this.render();
             }
-
-            this.addItem = function (pid, amount) {
+            
+            this.addItem = function (pid) {
                 const product=productsData[pid]
-                product==pid
-                const item = {
-                imgUrl:product.imgUrl,   
-                itemName: product.itemName,
-                price: product.price,
-                pid: pid,
-                amount: amount,
-                }; 
-                this.itemList.push(item);
+                // console.log("product",product.id)
+                // console.log("id",pid)
+                // console.log("購物車",this.itemList)
+                if (this.itemList[pid]) {
+                    this.itemList[pid].amount+=1
+                 } else {
+                    let amount = 1;
+                    const item = {
+                        imgUrl:product.imgUrl,   
+                        itemName: product.itemName,
+                        price: product.price,
+                        pid: pid,
+                        amount: amount,
+                        }; 
+                        this.itemList.push(item);
+                 }
                 this.render();  
             }
            
@@ -115,47 +122,49 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                 let cartSum = 0;
                 //運費300
                 let fee=300;
-                // console.log("1",this.itemList[0].amount+1);
                 this.itemList.forEach(function (item, idx) {
-                    console.log(item);
+                    // console.log(item);
                     const itemValue = item.price * item.amount
                     cartValue += itemValue;
                     cartSum = cartValue+fee;
                     const tr =
                 `   
-                 <li class=" p-cart col-md-12 px-4 py-4 border-secondary text-primary row d-flex align-items-center ff-ping-fang-tc-semibold ">
+                 <li class="row col-md-12 mb-2 pb-2 border-secondary text-primary align-items-center  justify-content-between ff-ping-fang-tc-semibold border border-right-0 border-left-0 border-top-0 ">
                        
-                    <div class="col-6 col-md-3 mb-1">
-                            <img src="${item.imgUrl}" class="img-cart w-100 d-block  ">
+                    <div class="col-6 col-md-3 pl-0">
+                            <img src="${item.imgUrl}" class="img-cart w-100 ">
                     </div>
-                    <div class="col-6 col-md-6 row mb-1 ff-ping-fang-tc-light d-flex align-items-center pl-2">
-                            <ul class="px-1 col-md-6 my-auto"">
-                               <li class="fz-20px">${item.itemName}</li>
-                               <li class="ff-Helvetica-neue-regular ">NT$ ${item.price}</li>
-                             </ul> 
-                            <div class="col-md-6 d-flex ay-auto button-list">
-                            <button  data-cart-minuser="${idx}" class=" minuser ff-ping-fang-tc-light border text-center  button-hover ">-</button>
+
+                    <div class=" row col-6 col-md-6 ff-ping-fang-tc-light align-items-center">
+                           <div class="col-md-6 ">
+                               <div class="fz-20px">${item.itemName}</div>
+                               <div class="ff-Helvetica-neue-regular py-2px">NT$ ${item.price}</div>
+                           </div>
+
+                            <div class="col-md-6 d-flex  btn-list">
+                            <button  data-cart-minuser="${idx}" class=" minuser ff-ping-fang-tc-light border border-right-0  text-center  button-hover ">-</button>
                             <button  class="ff-ping-fang-tc-light border border-right-0 text-center ">${item.amount}</button>
-                               <button  data-cart-adder="${idx}" class=" adder ff-ping-fang-tc-light  border text-center button-hover">+</button>
-                              
+                            <button  data-cart-adder="${idx}" class=" adder ff-ping-fang-tc-light  border text-center button-hover">+</button> 
                             </div>   
                     </div>
-                    <div class="col-12 col-md-3 d-flex "> 
-                             <div class="border-price col-md-10 fz-20px py-1  border border-secondary border-right-0 border-left-0  text-right text-md-left ">
-                               NT$ ${itemValue}
-                             </div>
-                             <button class="col-md-2 d-none d-md-block text-right " data-item-index="${idx}"><img src="./img/trash.svg" alt=""class="remove-btn w-2">
-                             </button>
-                    </div>    
-                </div>  
-            </li>
+
+                <div class="col-12 col-md-3 d-flex "> 
+                    <div class="border-price col-md-10 fz-20px py-1  border border-secondary border-right-0 border-left-0  text-right text-md-left ">
+                      NT$ ${itemValue}
+                    </div>
+                    <button class="col-md-2 d-none d-md-block text-right " data-item-index="${idx}"><img src="./img/trash.svg" alt=""class="remove-btn w-2">
+                    </button>
+                </div>    
+
+                </li>
+
                 `;
                 $cartList.append(tr);
                 });
                 $cartOrder.html(
                     `
                  <div class="order-list ">
-                    <div class="px-2 pb-2">
+                    <div class="p-order">
                       <div class="text-center text-primary py-2 px-auto fz-24px  bg-order">
                       訂單摘要
                       </div>
@@ -185,7 +194,6 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
                  
             }
         }
-
         const cart = new Cart();
                 cart.initCart();
   
@@ -195,20 +203,21 @@ fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
         //     let amount = 1;
         //     cart.addItem(pid, amount);
         // });
-        
 
+        // $("#product-row button").click(function(e){
+        //     e.preventDefault();
+        //     const pid = $(this).attr("data-product-id");
+        //     console.log(pid)
+        //     let amount = 1;
+        //     cart.addItem(pid,amount);
+        // });
+       
         $("#product-row button").click(function(e){
             e.preventDefault();
             const pid = $(this).attr("data-product-id");
-            let amount = 1;
-            cart.addItem(pid,amount);
-    
+            cart.addItem(pid);
         });
 
-        $(".add-item-tr").click(function (e) {
-            e.preventDefault();
-        });
-      
         $("#cart-list").delegate('.remove-btn', 'click', function () {
             let idx = $(this).attr('data-item-index');
             idx = parseInt(idx);
