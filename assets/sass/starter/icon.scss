@@ -20,7 +20,7 @@ i.icon {
 }
 
 
-$list:('fb-share', 'twitter', 'line', 'duplicate', 'arrow-left', 'arrow-down', 'play', 'location');
+$list:('minus','add','fb-share', 'twitter', 'line', 'duplicate', 'arrow-left', 'arrow-down', 'play', 'location');
 
 @each $var in $list {
     .icon-#{$var}:before {

@@ -269,7 +269,6 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
 .hover-bg-secondary-20 {
     @include media-breakpoint-up(xl) {
         transition: all .3s;
-
         &:hover,
         &:focus {
             background-color: rgba($secondary, .2) !important;
@@ -367,12 +366,6 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
    }
 }
 
-.page-list button{
-    width: 58px;
-    height: 58px;
-    border-color: $secondary;
-    }
-
 .email{
      &:before {
         font-family: "Font Awesome 5 Free"; 
@@ -409,19 +402,18 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
         height: 106px;
     }
 }
-
-.btn-list button{
-    height: 48px;
-    width: 48px;
-}
-.button-hover:hover{
+.border-button{
+    &:hover{
     background-color: $secondary ;
-        }
+    }
+    &:active{
+        background-color:$primary ;
+    }
+}
+
  
 .cart-number-size
 {
-    width: 40px;
-    height: 40px;
     line-height: 40px;
     border-radius: 50%;
     top: -20px;
@@ -462,9 +454,17 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
 &:hover{
     color:$secondary !important;
     background-color: $primary !important;
-} 
+}
+&:active{
+    background-color:#122a2c !important;
+}
 }
 
+.border-cart{
+@include media-breakpoint-up(md){
+border-bottom: 1px solid $secondary !important ; 
+       }
+}
 
 
         
