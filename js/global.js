@@ -1,5 +1,17 @@
 const $cartList = $('#cart-list');
 let productsData
+let jsTotal=document.querySelector(`#js-total`)
+let jsFee=document.querySelector(`#js-fee`)
+let jsSum=document.querySelector(`#js-sum`)
+let cartNumber=document.querySelector(`#cart-number`)
+let cartOrder=document.querySelector(`#cart-order`)
+let cartList=document.querySelector(`#cart-list`)
+let jsProdoctRow=document.querySelector(`.js-prodoct-row`)
+let productRow = document.querySelector('#product-row')
+let jsItem = document.querySelector('#js-item')
+
+
+
 
 function createProductCard(product,index) {
     return `
@@ -9,7 +21,7 @@ function createProductCard(product,index) {
             <div>
                 <img src="${product.imgUrl}" class="img-card d-block position-relative w-100">
             </div>
-            <div class="text-card position-absolute fz-16px">
+            <div class="card-span position-absolute fz-16px">
                 <span class=" text-white fz-16px px-1 py-1">本日精選</span>
             </div>
             <div class="d-flex text-center text-primary fz-18px fz-md-20px">
@@ -17,10 +29,10 @@ function createProductCard(product,index) {
                 <div class="flex-grow-1  ff-ping-fang-tc-semibold border-secondary border border-right-0 py-1 ">NT$ ${product.price}</div>
             </div>
         </a>
-    	<button  data-product-id="${index}" class=" js-prodoct-row add-item-tr fz-22px fz-md-28px btn-add bg-secondary text-center text-primary w-100 py-2"id="btn-cart" >
+    	<button data-cart="${index}" class="js-prodoct-row add-item-tr fz-22px fz-md-28px btn-add bg-secondary text-center text-primary w-100 py-2"id="btn-cart" >
     			加入購物車
     	</button>
-        <div class="btn-card position-absolute">
+        <div class="btn-card position-absolute ">
             <button >
                 <i class="far fa-heart fz-22px text-primary"></i>
             </button>
@@ -40,24 +52,17 @@ function Cart() {
         }
         this.render();
     }
-    
+
     this.addItem = function (pid) {
         const product=productsData[pid]
         // console.log("購物車",this.itemList)
         if (this.itemList[pid]) {
             this.itemList[pid].amount+=1
          } else {
-            let amount = 1;
-            const item = {
-                imgUrl:product.imgUrl,   
-                itemName:product.itemName,
-                price:product.price,
-                pid:pid,
-                amount:amount,
-                }; 
-                this.itemList.push(item);
+            const item=product
+            item.amount=1
+            this.itemList.push(item);
          }
-         
         this.updateDataToStorage();
         this.render(); 
     }
@@ -70,10 +75,9 @@ function Cart() {
     
     this.btnMinuserItem = function (i) {
         if(this.itemList[i].amount<=1){
-            this.itemList[i].amount=1;
-        }else{
-            document.querySelector(`#js-count-${i}`).innerHTML =--this.itemList[i].amount 
+            return
         }
+        document.querySelector(`#js-count-${i}`).innerHTML =--this.itemList[i].amount 
         this.updateDataToStorage();
         this.countRender(i)
     }
@@ -81,7 +85,7 @@ function Cart() {
     this.deleteItem = function (i) {
         this.itemList.splice(i,1);
         this.updateDataToStorage();
-        this.render();
+        this.render()
     }
   
     this.updateDataToStorage = function () {
@@ -97,34 +101,32 @@ function Cart() {
         this.itemList.forEach(function (item) {
             const itemValue = item.price * item.amount
             cartValue += itemValue;
-            cartSum = cartValue+fee; 
-            document.querySelector(`#js-total`).innerHTML =`NT$ ${cartValue}`
-            document.querySelector(`#js-fee`).innerHTML =`NT$ ${fee}`
-            document.querySelector(`#js-sum`).innerHTML =`NT$ ${cartSum}` 
+            cartSum = cartValue+fee;  
         })
+        jsTotal.innerHTML =`NT$ ${cartValue}`
+        jsFee.innerHTML =`NT$ ${fee}`
+        jsSum.innerHTML =`NT$ ${cartSum}` 
     }
     this.render = function () { 
-        $("#cart-number").html(`
-        <span class="cart-number-size w-5 h-5 position-absolute text-center text-primary bg-secondary fz-24"> 
+        cartNumber.innerHTML=`
+        <span class="cart-number-size rounded-circle w-5 h-5 position-absolute text-center text-primary bg-secondary fz-24"> 
         ${this.itemList.length}
          </span>
-         `);
-
-        $cartList.empty();
+         `
         let cartValue = 0;
         let cartSum = 0;
         let fee=300;
-        
+        let str;
         this.itemList.forEach(function (item, idx) {
             const itemValue = item.price * item.amount
             cartValue += itemValue;
             cartSum = cartValue+fee;
             const tr =
         `   
-         <li id="js-item-${idx}"  class=" row g-0 col-md-12 mb-2 pb-2 mx-0 px-0 border-cart border-secondary text-primary align-items-center  justify-content-between ff-ping-fang-tc-semibold  ">
+         <li id="js-item"  class=" row g-0 col-md-12 mb-2 pb-2 mx-0 px-0 border-cart border-secondary text-primary align-items-center  justify-content-between ff-ping-fang-tc-semibold  ">
                
             <div class="col-6 col-md-3 pl-0">
-                <img src="${item.imgUrl}" class="img-cart w-100 ">
+                <img src="${item.imgUrl}" class="cart-img w-100 ">
             </div>
 
             <div class=" row g-0 col-6 col-md-6 ff-ping-fang-tc-light align-items-center">
@@ -134,9 +136,9 @@ function Cart() {
                 </div>
 
                 <div class="col-md-6 d-flex  ">
-                    <button  data-minuser="${idx}" class=" js-minuser  w-6 h-6 ff-ping-fang-tc-light border border-right-0 text-center border-button"><i class="icon icon-minus text-primary pointer-events-none"></i></button>
+                    <button  data-minuser="${idx}" class=" js-minuser  w-6 h-6 ff-ping-fang-tc-light border border-right-0 text-center btn-active"><i class="icon icon-minus text-primary pointer-events-none"></i></button>
                     <div id="js-count-${idx}" class="d-flex justify-content-center align-items-center w-6 h-6 ff-ping-fang-tc-light border border-right-0">${item.amount}</div>
-                    <button  data-adder="${idx}" class=" js-adder  w-6 h-6 ff-ping-fang-tc-light  border text-center border-button"><i class="icon icon-add text-primary pointer-events-none"></i></button></button> 
+                    <button  data-adder="${idx}" class=" js-adder  w-6 h-6 ff-ping-fang-tc-light  border text-center btn-active"><i class="icon icon-add text-primary pointer-events-none"></i></button></button> 
                 </div>   
             </div>
 
@@ -148,16 +150,20 @@ function Cart() {
                     </button>
             </div> 
         </li>
-
         `;
-        $cartList.append(tr);
-        });
-        $('#js-total').html(`NT$ ${cartValue}`);
-        $('#js-fee').html(`NT$ ${fee}`);
-        $('#js-sum').html(`NT$ ${cartSum}`);
+        str=tr
+        $cartList.append(str);
+       
+    });
+        if(cartOrder){
+            jsTotal.innerHTML =`NT$ ${cartValue}`
+            jsFee.innerHTML =`NT$ ${fee}`
+            jsSum.innerHTML =`NT$ ${cartSum}` 
+        }
     }
+   
 }
-    const productRow = document.querySelector('#product-row')
+
     if(productRow){
         fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
             productsData = products
@@ -166,20 +172,24 @@ function Cart() {
                 const card =createProductCard(product,index)
                 str+=card
             });
+        
             if(productRow){
-            productRow.innerHTML=str;  
-            } 
-            $(".js-prodoct-row").click(function(e){
-                e.preventDefault();
-                const pid = $(this).attr("data-product-id");
-                cart.addItem(pid);
+            productRow.innerHTML=str; 
+            }         
+             $("#product-row").click(function(e){
+                cart.addItem(e.target.dataset.cart);
             });
+            // prodoctRow.addEventListener('click', (e) => {
+            //     if(target.matches('.js-cart')) {
+            //     cart.addItem(e.target.dataset.cart)
+            //     }
+            // }); 
         });
     }
-   
+    
     const cart = new Cart();
     cart.initCart();
-    const cartList = document.querySelector('#cart-list')
+     
     if(cartList){        
         cartList.addEventListener('click', (e) => {
             const target = e.target
@@ -196,6 +206,8 @@ function Cart() {
               const isConfirm = confirm('確定要刪除嗎？')
             index = target.dataset.index
             if (isConfirm) {
+            //   cartList.parentNode.removeChild(cartList)
+              $cartList.empty();
               cart.deleteItem(index);
               }
             }    
