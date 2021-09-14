@@ -329,6 +329,17 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
     font-family:"Times" !important;
 }
 
+.page-container{
+    @include media-breakpoint-down(sm){
+        padding: 0 16px;
+    }
+    @include media-breakpoint-between(sm,md){
+        padding: 0 24px;
+    }
+    @include media-breakpoint-up(lg){
+        padding: 0 0;
+    }
+}
 @include media-breakpoint-up(md){
     .footer-logo{
      margin-top: 25px;

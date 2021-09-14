@@ -6,16 +6,18 @@ let jsSum=document.querySelector(`#js-sum`)
 let cartNumber=document.querySelector(`#cart-number`)
 let cartOrder=document.querySelector(`#cart-order`)
 let cartList=document.querySelector(`#cart-list`)
-let jsProdoctRow=document.querySelector(`.js-prodoct-row`)
+let jsProductRow=document.querySelector(`.js-product-row`)
 let productRow = document.querySelector('#product-row')
-let jsItem = document.querySelector('#js-item')
+let jsProductBtn = document.querySelector('#js-product-btn')
+
+
 
 
 
 
 function createProductCard(product,index) {
     return `
-  <li class="col-md-6 mb-3">
+  <li class="col-md-6 mb-3 ">
     <div class="card border border-secondary">
         <a href="#" class="text-decoration-none ">
             <div>
@@ -29,7 +31,7 @@ function createProductCard(product,index) {
                 <div class="flex-grow-1  ff-ping-fang-tc-semibold border-secondary border border-right-0 py-1 ">NT$ ${product.price}</div>
             </div>
         </a>
-    	<button data-cart="${index}" class="js-prodoct-row add-item-tr fz-22px fz-md-28px btn-add bg-secondary text-center text-primary w-100 py-2"id="btn-cart" >
+    	<button id="js-product-btn" data-cart="${index}" class="js-product-row add-item-tr fz-22px fz-md-28px btn-add bg-secondary text-center text-primary w-100 py-2"id="btn-cart" >
     			加入購物車
     	</button>
         <div class="btn-card position-absolute ">
@@ -83,6 +85,10 @@ function Cart() {
     }
     
     this.deleteItem = function (i) {
+        let jsItem=document.querySelector(`#js-item-${i}`)
+        if(jsItem){
+        jsItem.remove()
+        }
         this.itemList.splice(i,1);
         this.updateDataToStorage();
         this.render()
@@ -108,11 +114,16 @@ function Cart() {
         jsSum.innerHTML =`NT$ ${cartSum}` 
     }
     this.render = function () { 
+
         cartNumber.innerHTML=`
         <span class="cart-number-size rounded-circle w-5 h-5 position-absolute text-center text-primary bg-secondary fz-24"> 
         ${this.itemList.length}
          </span>
          `
+        if(cartList){
+            cartList.innerHTML=""
+        }
+        // $cartList.empty()
         let cartValue = 0;
         let cartSum = 0;
         let fee=300;
@@ -123,7 +134,7 @@ function Cart() {
             cartSum = cartValue+fee;
             const tr =
         `   
-         <li id="js-item"  class=" row g-0 col-md-12 mb-2 pb-2 mx-0 px-0 border-cart border-secondary text-primary align-items-center  justify-content-between ff-ping-fang-tc-semibold  ">
+         <li id="js-item-${idx}" class=" row g-0 col-md-12 mb-2 pb-2 mx-0 px-0 border-cart border-secondary text-primary align-items-center  justify-content-between ff-ping-fang-tc-semibold  ">
                
             <div class="col-6 col-md-3 pl-0">
                 <img src="${item.imgUrl}" class="cart-img w-100 ">
@@ -143,7 +154,7 @@ function Cart() {
             </div>
 
             <div class="col-12 col-md-3 d-flex  px-0"> 
-                    <div  id="js-value-${idx}"   class="border-price col-md-10 fz-20px py-1 border border-secondary border-right-0 border-left-0  text-right text-md-left ">
+                    <div  id="js-value-${idx}"   class="price-border col-md-10 fz-20px py-1 border border-secondary border-right-0 border-left-0  text-right text-md-left ">
                     NT$ ${itemValue}
                     </div>
                     <button class="col-md-2 d-none d-md-block text-right pr-0 " data-index="${idx}"><img src="./img/trash.svg" alt=""class="js-remove-btn w-2">
@@ -176,14 +187,10 @@ function Cart() {
             if(productRow){
             productRow.innerHTML=str; 
             }         
-             $("#product-row").click(function(e){
-                cart.addItem(e.target.dataset.cart);
-            });
-            // prodoctRow.addEventListener('click', (e) => {
-            //     if(target.matches('.js-cart')) {
-            //     cart.addItem(e.target.dataset.cart)
-            //     }
-            // }); 
+            productRow.addEventListener('click', (e) => {
+                cart.addItem(e.target.dataset.cart)
+                }); 
+            
         });
     }
     
@@ -206,8 +213,6 @@ function Cart() {
               const isConfirm = confirm('確定要刪除嗎？')
             index = target.dataset.index
             if (isConfirm) {
-            //   cartList.parentNode.removeChild(cartList)
-              $cartList.empty();
               cart.deleteItem(index);
               }
             }    
