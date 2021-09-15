@@ -55,18 +55,23 @@ function Cart() {
         this.render();
     }
 
-    this.addItem = function (pid) {
-        const product=productsData[pid]
-        // console.log("購物車",this.itemList)
-        if (this.itemList[pid]) {
-            this.itemList[pid].amount+=1
-         } else {
-            const item=product
-            item.amount=1
-            this.itemList.push(item);
-         }
+    this.addItem = function (idx) {
+            const product=productsData[idx] 
+            console.log(productsData) 
+            console.log(idx) 
+        
+            if (product.amount) {
+                this.itemList.forEach(function(item){
+                product.id==item.id
+                })
+                this.itemList[idx].amount+=1
+             } else {
+                const item=product
+                item.amount=1
+                this.itemList.push(item);
+            }
         this.updateDataToStorage();
-        this.render(); 
+        this.cartNumberRender();
     }
    
     this.btnAddItem = function (i) {
@@ -85,45 +90,49 @@ function Cart() {
     }
     
     this.deleteItem = function (i) {
-        let jsItem=document.querySelector(`#js-item-${i}`)
-        if(jsItem){
-        jsItem.remove()
-        }
+        document.querySelector(`#js-item-${i}`).remove()
         this.itemList.splice(i,1);
+        this.updateTotal();
+        this.cartNumberRender();
         this.updateDataToStorage();
-        this.render()
+        console.log(this.itemList)
     }
   
     this.updateDataToStorage = function () {
         const dataString = JSON.stringify(this.itemList);
         localStorage.setItem(this.key, dataString);
     }
+
+    this.updateTotal=function(){
+        let cartValue = 0;
+        let cartSum = 0;
+        let fee = 300;
+        this.itemList.forEach(function(item) {
+            const itemValue = item.price * item.amount
+            cartValue += itemValue;
+            cartSum = cartValue + fee;
+        })
+        jsTotal.innerHTML = `NT$ ${cartValue}`
+        jsFee.innerHTML = `NT$ ${fee}`
+        jsSum.innerHTML = `NT$ ${cartSum}`
+    }
+
     this.countRender =function (i){
         document.querySelector(`#js-value-${i}`).innerHTML =`NT$ ${this.itemList[i].amount*this.itemList[i].price}`
         console.log(this.itemList)
-        let cartValue = 0;
-        let cartSum = 0;
-        let fee=300;
-        this.itemList.forEach(function (item) {
-            const itemValue = item.price * item.amount
-            cartValue += itemValue;
-            cartSum = cartValue+fee;  
-        })
-        jsTotal.innerHTML =`NT$ ${cartValue}`
-        jsFee.innerHTML =`NT$ ${fee}`
-        jsSum.innerHTML =`NT$ ${cartSum}` 
+        this.updateTotal();
     }
-    this.render = function () { 
-
+    this.cartNumberRender =function (){
         cartNumber.innerHTML=`
         <span class="cart-number-size rounded-circle w-5 h-5 position-absolute text-center text-primary bg-secondary fz-24"> 
         ${this.itemList.length}
          </span>
          `
-        if(cartList){
-            cartList.innerHTML=""
-        }
-        // $cartList.empty()
+         console.log(this.itemList)
+    }
+
+    this.render = function () { 
+        this.cartNumberRender();
         let cartValue = 0;
         let cartSum = 0;
         let fee=300;
@@ -154,17 +163,19 @@ function Cart() {
             </div>
 
             <div class="col-12 col-md-3 d-flex  px-0"> 
-                    <div  id="js-value-${idx}"   class="price-border col-md-10 fz-20px py-1 border border-secondary border-right-0 border-left-0  text-right text-md-left ">
+                    <div  id="js-value-${idx}" class="price-border col-md-10 fz-20px py-1 border border-secondary border-right-0 border-left-0  text-right text-md-left ">
                     NT$ ${itemValue}
                     </div>
-                    <button class="col-md-2 d-none d-md-block text-right pr-0 " data-index="${idx}"><img src="./img/trash.svg" alt=""class="js-remove-btn w-2">
+                    <button id="js-btn" class="col-md-2 d-none d-md-block text-right pr-0 " data-btn="${idx}"><img src="./img/trash.svg" alt=""class="pointer-events-none w-2">
                     </button>
             </div> 
         </li>
         `;
         str=tr
-        $cartList.append(str);
-       
+        if(cartList){
+            cartList.innerHTML+=str;
+        }
+      
     });
         if(cartOrder){
             jsTotal.innerHTML =`NT$ ${cartValue}`
@@ -172,9 +183,7 @@ function Cart() {
             jsSum.innerHTML =`NT$ ${cartSum}` 
         }
     }
-   
 }
-
     if(productRow){
         fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
             productsData = products
@@ -186,11 +195,13 @@ function Cart() {
         
             if(productRow){
             productRow.innerHTML=str; 
-            }         
+            }
+
             productRow.addEventListener('click', (e) => {
+                if(e.target.dataset.cart){
                 cart.addItem(e.target.dataset.cart)
+                }
                 }); 
-            
         });
     }
     
@@ -209,10 +220,10 @@ function Cart() {
               index = target.dataset.minuser
               cart.btnMinuserItem(index);
             }
-            if (target.matches('.js-remove-btn')) {
+            if (target.matches('#js-btn')) {
               const isConfirm = confirm('確定要刪除嗎？')
-            index = target.dataset.index
-            if (isConfirm) {
+              index = target.dataset.btn
+              if (isConfirm) {
               cart.deleteItem(index);
               }
             }    

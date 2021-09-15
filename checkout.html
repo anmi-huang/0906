@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>checkout</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+         integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	<link rel="stylesheet" href="assets/css/app.css?t=20210913" />
+   
+</head>
+<body>
+<div class="maw-1280px mx-auto">
+    <header>
+        <nav class="navbar d-flex justify-content-between h-12 pt-2 px-2 bg-white">
+    <!-- 手機版切換導覽列顯示按鈕 -->
+            <button class="d-block d-md-none">
+                <img class="w-4 ml-1" src="./img/line.png">
+            </button>
+            <a href="./index.html"  class="navbar-brand d-flex">
+                <img class="d-none d-md-block" src="./img/logo-all-dark (2).svg" width="170px">
+                <img class="d-block d-md-none" src="./img/logotype-lg-dark.svg" width="114px">
+            </a>
+            <ul class="d-flex fz-md-16px ">
+                <li class="my-auto mr-6  d-none d-md-block "><a href="./index.html" class="  text-decoration-none text-primary">首頁</a></li>
+                <li class="my-auto mr-6  d-none d-md-block  "><a href="#" class=" d-none d-md-block  text-decoration-none text-primary">甜點</a></li>
+                <li class="my-auto mr-6 d-none d-md-block  "><a href="#" class="  text-decoration-none text-primary">登入</a></li>
+                <li class="my-auto ">
+                <div class=" text-decoration-none text-primary position-relative">
+            <a href="./cart.html">
+                <i  class="fas fa-shopping-cart fz-26px fz-md-28px mr-1 text-primary ">
+                    <div id="cart-number"></div>
+                </i>
+             </a> 
+                </div>
+            </ul>
+        </nav>
+        <!-- <div class="h-12 pt-2 px-2"></div> -->
+    </header>
+    <form class="ff-ping-fang-tc-semibold">
+      <div class="row mx-0 bg-primary text-secondary page-container py-4 ">
+        <div class="col-6 fz-36px">運送</div>
+        <div class="col-6 progress-icon d-flex justify-content-between ">
+            <div class="rounded-circle border border-secondary w-2 h-2 "></div>
+            <div class="rounded-circle border border-secondary w-2 h-2 "></div>
+            <div class="rounded-circle border border-secondary w-2 h-2 "></div>
+        </div>
+        <div class="col-6 pr-4px">
+            <label for="lastname" class="d-block pb-1 mt-4 fz-20px ">姓氏</label>
+            <input type="text" id="lastname" class="form-input-group w-100" title="姓氏" name="lastname" maxlength="2" placeholder="王" required>
+        </div>
+        <div class="col-6 pl-4px">
+            <label for="firstname" class="d-block pb-1 mt-4 fz-20px ">名字</label>
+            <input type="text" id="firstname" class="form-input-group w-100" title="名字" name="firstname" maxlength="10" placeholder="小明" required>
+        </div>
+        <div class="col">
+            <label for="phone-num" class="d-block pb-1 mt-2 fz-20px">電話</label>
+            <input type="text" id="phone-num" class="form-input-group w-100" title="電話" name="phone-num" maxlength="10" placeholder="0912-345-678" required>
+        </div>
+        <div class="col-12">
+            <label for="address" class="d-block pb-1 mt-2 fz-20px">地址</label>
+        </div>
+        <div class="col-6 pr-4px">
+            <select name="city" id="city"  class="w-100 h-7 bg-secondary text-color-matcha mb-1">
+                <option value="高雄市">高雄市</option>
+            </select>
+        </div>
+        <div class="col-6 pl-4px">
+            <!-- <input type="select" class="form-input-group w-100"  required> -->
+            <select name="cityarea" id="cityarea" class="w-100 h-7 bg-secondary text-color-matcha mb-1">
+                <option value="新興區">新興區</option>
+            </select>
+        </div>
+        <div class="col">
+            <input type="text" id="address" class="form-input-group w-100" title="地址" name="address" placeholder="幸福路 520 號" required>
+        </div>
+    </div>
+    <button type="submit" class="text-primary bg-yellow text-center w-100 h-8 fz-24px ff-ping-fang-tc-semibold">下一步</button>
+    </form>    
+    <footer id="footer">
+    <div class="footer-list bg-primary text-white text-center w-100 py-4 ">
+        <div class="px-2">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 d-flex justify-content-center my-auto">
+                    <img src="./img/logo-light.svg" alt=""class=" w-6 mr-1">
+                    <p class=" ff-Helvetica-neue-light fz-24px fz-md-28px my-auto ">訂閱你我的甜蜜郵件</p>
+                </div>
+                <div class="col-md-6 col-sm-12 py-3 ">
+                    <div class="input-group d-flex justify-content-center">
+                        <div class="email position-relative">
+                            <input type="text">
+                        </div>
+                        <button type="button"  class="btn bg-yellow rounded-0 border-0  ">
+                            <img src="https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/master/student-week1/arrow_forward-24px.png"
+                                    alt="">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-primary py-4 bg-secondary" >
+        <div class="px-2">
+            <div class="row justify-content-between">
+                <div class=" col-md-6 d-flex flex-column">
+                    <ul class="mb-0 ff-Helvetica-neue">
+                        <div class="footer-logo pb-4">
+                            <a href="#"><img src="./img/logotype-lg-dark.svg" alt="" width="180px"></a>
+                        </div>
+                        <li>07-1234-5678</li>
+                        <li>sweetaste@email.com</li>
+                        <li>800 高雄市新興區幸福路 520 號</li>
+                    </ul>
+                    <div class="d-flex">
+                        <a class=" w-5 pl-0 pr-1 pt-2" href="#"><img src="./img/ic-line@.svg" alt=""></a>
+                        <a  class=" w-5 pr-1 pt-2" href="#"><img src="./img/ic-facebook.svg" alt=""></a>
+                    </div>
+                </div>
+                 <div class=" col-md-6 d-flex flex-column">
+                    <h4 class="slogan d-none d-md-block  text-primary fz-18px fz-md-22px py-6 ">今天是個<span>——</span><br>吃甜點的好日子。</h4>
+                    <p class="text-sm-left text-md-right ff-time">© 2018 Sweetaste* All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </footer>
+
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+	<script src="./js/global.js"></script>
+    <!-- <script src="./js/app.min.js"></script> -->
+</div>
+</body>
+</html>

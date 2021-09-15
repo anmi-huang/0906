@@ -469,6 +469,22 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
     border-bottom: 1px solid $secondary !important ; 
     }
 }
+.form-input-group{
+    background-color: $secondary ;
+    height:56px;
+    text-indent: 10px;
+}
+.text-color-matcha{
+color: #8DA291 !important;
+}
 
-
+::placeholder {
+    color: #8DA291;
+}
+::-webkit-input-placeholder { /* Chrome, Safari */
+    color: #8DA291;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    color: #8DA291;
+}
         
