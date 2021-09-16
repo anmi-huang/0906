@@ -337,7 +337,7 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
         padding: 0 24px;
     }
     @include media-breakpoint-up(lg){
-        padding: 0 0;
+        padding: 0;
     }
 }
 @include media-breakpoint-up(md){
@@ -469,11 +469,7 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
     border-bottom: 1px solid $secondary !important ; 
     }
 }
-.form-input-group{
-    background-color: $secondary ;
-    height:56px;
-    text-indent: 10px;
-}
+
 .text-color-matcha{
 color: #8DA291 !important;
 }
@@ -487,4 +483,32 @@ color: #8DA291 !important;
 :-ms-input-placeholder { /* IE 10+ */
     color: #8DA291;
 }
-        
+
+select {
+    text-indent: 16px;
+  }
+
+.order-container{
+    @include media-breakpoint-down(sm){
+        padding: 0;
+    }
+    @include media-breakpoint-between(sm,md){
+        padding: 0 24px;
+    }
+    @include media-breakpoint-up(lg){
+        padding: 0;
+    }
+}
+// .pro-icon::before{
+// content: "";
+// background-color: #ffefee;
+// width: 100%;
+// height: 1px;
+// display: block;
+// position: absolute;
+
+// }
+
+// .form-input-group:valid{
+//     border:2px solid green;
+//   }

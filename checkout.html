@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	<link rel="stylesheet" href="assets/css/app.css?t=20210913" />
-   
 </head>
 <body>
 <div class="maw-1280px mx-auto">
-    <header>
-        <nav class="navbar d-flex justify-content-between h-12 pt-2 px-2 bg-white">
-    <!-- 手機版切換導覽列顯示按鈕 -->
+    <div class="order-container">
+        <header>
+        <nav class="navbar d-flex justify-content-between h-10 pt-2 px-2 bg-white">
+            <!-- 手機版切換導覽列顯示按鈕 -->
             <button class="d-block d-md-none">
                 <img class="w-4 ml-1" src="./img/line.png">
             </button>
@@ -36,47 +36,81 @@
             </ul>
         </nav>
         <!-- <div class="h-12 pt-2 px-2"></div> -->
-    </header>
-    <form class="ff-ping-fang-tc-semibold">
-      <div class="row mx-0 bg-primary text-secondary page-container py-4 ">
-        <div class="col-6 fz-36px">運送</div>
-        <div class="col-6 progress-icon d-flex justify-content-between ">
-            <div class="rounded-circle border border-secondary w-2 h-2 "></div>
-            <div class="rounded-circle border border-secondary w-2 h-2 "></div>
-            <div class="rounded-circle border border-secondary w-2 h-2 "></div>
+        </header>
+        <div class="row mt-2 ">
+            <div class="col-md-8">
+                <form class="ff-ping-fang-tc-semibold" id="form-id" action="">
+                    <div class="row mx-0 bg-primary text-secondary page-container py-4 px-4">
+                        <div class="col-6 fz-36px">運送</div>
+                        <div class="col-6 d-flex justify-content-between align-items-center">
+                            <div class="rounded-circle border border-secondary w-3 h-3 d-flex justify-content-center align-items-center ">
+                                <div class="rounded-circle border border-secondary w-2 h-2 bg-secondary"></div>
+                            </div>
+                            <div class="rounded-circle border border-secondary w-3 h-3 d-flex justify-content-center align-items-center ">
+                                <div class="rounded-circle border border-secondary w-2 h-2"></div>
+                            </div>
+                            <div class="rounded-circle border border-secondary w-3 h-3 d-flex justify-content-center align-items-center ">
+                                 <div class="rounded-circle border border-secondary w-2 h-2"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 pr-4px ">
+                            <label for="lastname" class="d-block pb-1 mt-4 fz-20px ">姓氏</label>
+                            <input type="text" id="lastname" class=" px-2 bg-secondary h-7   w-100" title="姓氏" name="lastname" maxlength="10" placeholder="王" required>
+                        </div>
+                        <div class="col-6 pl-4px">
+                            <label for="firstname" class="d-block pb-1 mt-4 fz-20px ">名字</label>
+                            <input type="text" id="firstname" class="px-2 bg-secondary h-7  w-100" title="名字" name="firstname" maxlength="10" placeholder="小明" required>
+                        </div>
+                        <div class="col">
+                            <label for="phone" class="d-block pb-1 mt-2 fz-20px">電話</label>
+                            <input  type="text" id id="phone" class="px-2 bg-secondary h-7  w-100" title="電話" name="phone" maxlength="10" placeholder="0912-345-678" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="address" class="d-block pb-1 mt-2 fz-20px">地址</label>
+                        </div>
+                        <div class="col-6 pr-4px">
+                            <select name="city" id="city-select"  class=" w-100 h-7 bg-secondary text-color-matcha mb-1 ">
+                                <option value=""></option>
+                            </select>
+                    </div>
+            <div class="col-6 pl-4px">
+                <select name="cityarea" id="city-area" class=" w-100 h-7 bg-secondary text-color-matcha mb-1">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="col">
+                <input type="text" id="address" class="px-2 bg-secondary h-7  w-100" title="地址" name="address" placeholder="幸福路 520 號" required>
+            </div>
+                    </div>
+                    <input class="submit text-primary bg-yellow text-center w-100 h-8 fz-24px ff-ping-fang-tc-semibold" type="submit" value="下一步">
+                </form>  
+            </div>
+            <aside id="cart-order" class="d-none d-md-block col-md-4 ff-ping-fang-tc-semibold text-primary text-center fz-24px">
+                <div class="border border-secondary ">
+                    <div class="bg-secondary text-center text-primary mb-2 py-2 px-auto fz-24px">訂單摘要</div>
+                    <div class=" px-2 d-flex justify-content-between ff-ping-fang-tc-light fz-16px pb-1">
+                            <div>小計</div>
+                            <div id="js-total" class="text-right"></div>
+                    </div>
+                    <div class="px-2 d-flex justify-content-between ff-ping-fang-tc-light fz-16px ">
+                        <div>運費</div>
+                        <div id="js-fee" class="text-right"></div>
+                    </div>
+                    <div class="d-flex justify-content-between fz-20px px-2 mb-2">
+                        <div class="pt-2">總計</div>
+                        <div id="js-sum" class="pt-2 text-right"></div>
+                    </div>
+                </div>    
+                <div class="border border-secondary mb-8 mt-2">
+                    <div class=" bg-secondary text-center text-primary mb-2 py-2 px-auto fz-24px ">
+                        您的購物車
+                    </div>
+                     <ul id="shopping-list" class=""></ul>
+                </div>
+            </aside>
         </div>
-        <div class="col-6 pr-4px">
-            <label for="lastname" class="d-block pb-1 mt-4 fz-20px ">姓氏</label>
-            <input type="text" id="lastname" class="form-input-group w-100" title="姓氏" name="lastname" maxlength="2" placeholder="王" required>
-        </div>
-        <div class="col-6 pl-4px">
-            <label for="firstname" class="d-block pb-1 mt-4 fz-20px ">名字</label>
-            <input type="text" id="firstname" class="form-input-group w-100" title="名字" name="firstname" maxlength="10" placeholder="小明" required>
-        </div>
-        <div class="col">
-            <label for="phone-num" class="d-block pb-1 mt-2 fz-20px">電話</label>
-            <input type="text" id="phone-num" class="form-input-group w-100" title="電話" name="phone-num" maxlength="10" placeholder="0912-345-678" required>
-        </div>
-        <div class="col-12">
-            <label for="address" class="d-block pb-1 mt-2 fz-20px">地址</label>
-        </div>
-        <div class="col-6 pr-4px">
-            <select name="city" id="city"  class="w-100 h-7 bg-secondary text-color-matcha mb-1">
-                <option value="高雄市">高雄市</option>
-            </select>
-        </div>
-        <div class="col-6 pl-4px">
-            <!-- <input type="select" class="form-input-group w-100"  required> -->
-            <select name="cityarea" id="cityarea" class="w-100 h-7 bg-secondary text-color-matcha mb-1">
-                <option value="新興區">新興區</option>
-            </select>
-        </div>
-        <div class="col">
-            <input type="text" id="address" class="form-input-group w-100" title="地址" name="address" placeholder="幸福路 520 號" required>
-        </div>
+
     </div>
-    <button type="submit" class="text-primary bg-yellow text-center w-100 h-8 fz-24px ff-ping-fang-tc-semibold">下一步</button>
-    </form>    
     <footer id="footer">
     <div class="footer-list bg-primary text-white text-center w-100 py-4 ">
         <div class="px-2">
@@ -133,8 +167,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 	<script src="./js/global.js"></script>
+    <script src="./js/ex.js"></script>
     <!-- <script src="./js/app.min.js"></script> -->
 </div>
 </body>

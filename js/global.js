@@ -1,5 +1,6 @@
-const $cartList = $('#cart-list');
+
 let productsData
+let citiesData
 let jsTotal=document.querySelector(`#js-total`)
 let jsFee=document.querySelector(`#js-fee`)
 let jsSum=document.querySelector(`#js-sum`)
@@ -9,10 +10,8 @@ let cartList=document.querySelector(`#cart-list`)
 let jsProductRow=document.querySelector(`.js-product-row`)
 let productRow = document.querySelector('#product-row')
 let jsProductBtn = document.querySelector('#js-product-btn')
-
-
-
-
+ 
+const shoppingList = document.querySelector('#shopping-list')
 
 
 function createProductCard(product,index) {
@@ -31,7 +30,7 @@ function createProductCard(product,index) {
                 <div class="flex-grow-1  ff-ping-fang-tc-semibold border-secondary border border-right-0 py-1 ">NT$ ${product.price}</div>
             </div>
         </a>
-    	<button id="js-product-btn" data-cart="${index}" class="js-product-row add-item-tr fz-22px fz-md-28px btn-add bg-secondary text-center text-primary w-100 py-2"id="btn-cart" >
+    	<button id="js-product-btn" data-addbtn="${index}"  data-cart="${product.id}" class="js-product-row add-item-tr fz-22px fz-md-28px btn-add bg-secondary text-center text-primary w-100 py-2"id="btn-cart" >
     			加入購物車
     	</button>
         <div class="btn-card position-absolute ">
@@ -46,6 +45,7 @@ function createProductCard(product,index) {
 
 function Cart() {
     this.key ='example-cart';
+    this.key2 ='example-cart2';
     this.itemList = [];
     this.initCart = function () {
         const localDataString = localStorage.getItem(this.key);
@@ -55,25 +55,24 @@ function Cart() {
         this.render();
     }
 
-    this.addItem = function (idx) {
-            const product=productsData[idx] 
-            console.log(productsData) 
-            console.log(idx) 
-        
-            if (product.amount) {
-                this.itemList.forEach(function(item){
-                product.id==item.id
-                })
-                this.itemList[idx].amount+=1
-             } else {
-                const item=product
-                item.amount=1
-                this.itemList.push(item);
-            }
-        this.updateDataToStorage();
-        this.cartNumberRender();
-    }
-   
+    this.addItem = function (idx,pid) {
+          
+        let list=this.itemList
+        const product=productsData[idx] 
+        console.log(product)
+        const findIdx = list.findIndex((item)=>item.id===pid)
+        // console.log("findIdx",findIdx)
+        if (list[findIdx]) {
+            list[findIdx].amount+=1 
+        }
+        else{
+            const item=product
+            item.amount=1
+            this.itemList.push(item);
+            }        
+    this.updateDataToStorage();
+    this.cartNumberRender();
+}   
     this.btnAddItem = function (i) {
         document.querySelector(`#js-count-${i}`).innerHTML =++this.itemList[i].amount 
         this.updateDataToStorage();
@@ -89,9 +88,10 @@ function Cart() {
         this.countRender(i)
     }
     
-    this.deleteItem = function (i) {
+    this.deleteItem = function (i,pid) {
         document.querySelector(`#js-item-${i}`).remove()
-        this.itemList.splice(i,1);
+        const idxRemove = this.itemList.findIndex((item)=>item.id===pid)
+        this.itemList.splice(idxRemove,1);
         this.updateTotal();
         this.cartNumberRender();
         this.updateDataToStorage();
@@ -128,7 +128,6 @@ function Cart() {
         ${this.itemList.length}
          </span>
          `
-         console.log(this.itemList)
     }
 
     this.render = function () { 
@@ -137,6 +136,7 @@ function Cart() {
         let cartSum = 0;
         let fee=300;
         let str;
+        let shp;
         this.itemList.forEach(function (item, idx) {
             const itemValue = item.price * item.amount
             cartValue += itemValue;
@@ -166,14 +166,31 @@ function Cart() {
                     <div  id="js-value-${idx}" class="price-border col-md-10 fz-20px py-1 border border-secondary border-right-0 border-left-0  text-right text-md-left ">
                     NT$ ${itemValue}
                     </div>
-                    <button id="js-btn" class="col-md-2 d-none d-md-block text-right pr-0 " data-btn="${idx}"><img src="./img/trash.svg" alt=""class="pointer-events-none w-2">
+                    <button id="js-btn" class="col-md-2 d-none d-md-block text-right pr-0 " data-btn="${idx}" data-pid="${item.id}" ><img src="./img/trash.svg" alt=""class="pointer-events-none w-2">
                     </button>
             </div> 
         </li>
-        `;
+        `
+        const list=
+        `
+            <li id="js-item-${idx}" class=" row g-0 mx-0 px-0 col-md-12  align-items-center ff-ping-fang-tc-semibold  ">
+                <div class="col-md-6 ">
+                    <img src="${item.imgUrl}" class="cart-img w-100 h-10 px-2">
+                </div>
+                <div class=" row g-0 col-md-6 ff-ping-fang-tc-light ">
+                    <div>
+                        <div class="fz-16px">${item.itemName}  (${item.amount})</div>
+                        <div  id="js-value-${idx}" class="fz-20px text-left">NT$ ${itemValue}</div>
+                    </div>
+                </div>
+            </li>`;
         str=tr
         if(cartList){
             cartList.innerHTML+=str;
+        }
+        shp=list
+        if(shoppingList){
+            shoppingList.innerHTML+=shp;
         }
       
     });
@@ -198,8 +215,9 @@ function Cart() {
             }
 
             productRow.addEventListener('click', (e) => {
-                if(e.target.dataset.cart){
-                cart.addItem(e.target.dataset.cart)
+                if(e.target.dataset.addbtn){
+                 const cartId=e.target.dataset.cart*1  
+                cart.addItem(e.target.dataset.addbtn,cartId)
                 }
                 }); 
         });
@@ -223,9 +241,46 @@ function Cart() {
             if (target.matches('#js-btn')) {
               const isConfirm = confirm('確定要刪除嗎？')
               index = target.dataset.btn
+              const pid = target.dataset.pid*1
               if (isConfirm) {
-              cart.deleteItem(index);
+              cart.deleteItem(index,pid);
               }
             }    
         })
-    }     
+    } 
+    
+    
+    let dataAll
+    const formId=document.querySelector(`#form-id`)
+    const citySelect=document.querySelector(`#city-select`)
+    const cityArea=document.querySelector(`#city-area`)
+    
+   function formSelect(data){
+        citySelect.innerHTML=
+        data.map((item,idx)=>`<option value="${idx}">${item.name}</option>`).join('')
+        citySelect.addEventListener('change',(e)=>{
+        console.log(dataAll[e.target.value])
+        cityArea.innerHTML=dataAll[e.target.value].districts.map((item,idx)=>`<option value="${idx}">${item.name}</option>`).join('')
+        }) 
+        const opts=citySelect.getElementsByTagName("option")
+        opts[17].selected=true
+   } 
+   if(formId){
+    fetch('./api/taiwan_districts.json').then(resp => resp.json()).then(({ data }) => {
+       dataAll=data   
+       formSelect(dataAll)
+    });
+   }
+
+  // const formInput = document.querySelector(`.form-input-group`);
+    // formId.forEach(input=>{
+    //  input.addEventListener('submit',function(){
+    //     if (input.checkValidity()) {
+    //      input.cartList.add('valid')
+    //     //  input.cartList.remove('invalid')
+    //     }else{
+    //         input.cartList.remove('valid')
+    //         // input.cartList.add('invalid')  
+    //     }
+    //    })  
+    //    })  
