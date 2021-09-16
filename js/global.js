@@ -259,12 +259,19 @@ function Cart() {
         citySelect.innerHTML=
         data.map((item,idx)=>`<option value="${idx}">${item.name}</option>`).join('')
         citySelect.addEventListener('change',(e)=>{
-        console.log(dataAll[e.target.value])
-        cityArea.innerHTML=dataAll[e.target.value].districts.map((item,idx)=>`<option value="${idx}">${item.name}</option>`).join('')
+         setCity(e.target.value)
+         
         }) 
-        const opts=citySelect.getElementsByTagName("option")
-        opts[17].selected=true
+        // const opts=citySelect.getElementsByTagName("option")
+        // opts[17].selected=true
+    
+       citySelect.value=17
+       setCity(17)
+
    } 
+   function setCity(num){
+    cityArea.innerHTML=dataAll[num].districts.map((item,idx)=>`<option value="${idx}">${item.name}</option>`).join('')
+   }
    if(formId){
     fetch('./api/taiwan_districts.json').then(resp => resp.json()).then(({ data }) => {
        dataAll=data   
