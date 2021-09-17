@@ -30,6 +30,7 @@
     "gulp-iconfont-css": "^2.1.0",
     "gulp-livereload": "^3.8.1",
     "gulp-minify-css": "^1.2.4",
+    "gulp-noop": "^1.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "gulp-sass-bulk-import": "^1.0.1",

@@ -1,18 +1,16 @@
-
 let productsData
 let citiesData
-let jsTotal=document.querySelector(`#js-total`)
-let jsFee=document.querySelector(`#js-fee`)
-let jsSum=document.querySelector(`#js-sum`)
-let cartNumber=document.querySelector(`#cart-number`)
-let cartOrder=document.querySelector(`#cart-order`)
-let cartList=document.querySelector(`#cart-list`)
-let jsProductRow=document.querySelector(`.js-product-row`)
-let productRow = document.querySelector('#product-row')
-let jsProductBtn = document.querySelector('#js-product-btn')
+const jsTotal=document.querySelector(`#js-total`)
+const jsFee=document.querySelector(`#js-fee`)
+const jsSum=document.querySelector(`#js-sum`)
+const cartNumber=document.querySelector(`#cart-number`)
+const cartOrder=document.querySelector(`#cart-order`)
+const cartList=document.querySelector(`#cart-list`)
+const jsProductRow=document.querySelector(`.js-product-row`)
+const productRow = document.querySelector('#product-row')
+const jsProductBtn = document.querySelector('#js-product-btn')
  
 const shoppingList = document.querySelector('#shopping-list')
-
 
 function createProductCard(product,index) {
     return `
@@ -59,9 +57,7 @@ function Cart() {
           
         let list=this.itemList
         const product=productsData[idx] 
-        console.log(product)
         const findIdx = list.findIndex((item)=>item.id===pid)
-        // console.log("findIdx",findIdx)
         if (list[findIdx]) {
             list[findIdx].amount+=1 
         }
@@ -95,7 +91,6 @@ function Cart() {
         this.updateTotal();
         this.cartNumberRender();
         this.updateDataToStorage();
-        console.log(this.itemList)
     }
   
     this.updateDataToStorage = function () {
@@ -119,7 +114,6 @@ function Cart() {
 
     this.countRender =function (i){
         document.querySelector(`#js-value-${i}`).innerHTML =`NT$ ${this.itemList[i].amount*this.itemList[i].price}`
-        console.log(this.itemList)
         this.updateTotal();
     }
     this.cartNumberRender =function (){
@@ -173,17 +167,18 @@ function Cart() {
         `
         const list=
         `
-            <li id="js-item-${idx}" class=" row g-0 mx-0 px-0 col-md-12  align-items-center ff-ping-fang-tc-semibold  ">
+             <li id="js-item-${idx}" class=" row g-0 mx-0 px-0 col-md-12  align-items-center ff-ping-fang-tc-semibold  ">
                 <div class="col-md-6 ">
                     <img src="${item.imgUrl}" class="cart-img w-100 h-10 px-2">
                 </div>
                 <div class=" row g-0 col-md-6 ff-ping-fang-tc-light ">
                     <div>
-                        <div class="fz-16px">${item.itemName}  (${item.amount})</div>
-                        <div  id="js-value-${idx}" class="fz-20px text-left">NT$ ${itemValue}</div>
+                        <div class="fz-16px">${item.itemName}&nbsp; (${item.amount})</div>
+                        <div id="js-value-${idx}" class="fz-20px text-left">NT$ ${itemValue}</div>
                     </div>
                 </div>
-            </li>`;
+            </li>
+        `;
         str=tr
         if(cartList){
             cartList.innerHTML+=str;
@@ -201,93 +196,50 @@ function Cart() {
         }
     }
 }
-    if(productRow){
-        fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
-            productsData = products
-            let str=" "
-            productsData.forEach((product,index) => {
-                const card =createProductCard(product,index)
-                str+=card
-            });
-        
-            if(productRow){
-            productRow.innerHTML=str; 
-            }
-
-            productRow.addEventListener('click', (e) => {
-                if(e.target.dataset.addbtn){
-                 const cartId=e.target.dataset.cart*1  
-                cart.addItem(e.target.dataset.addbtn,cartId)
-                }
-                }); 
+if(productRow){
+    fetch('api/dessert.json').then(resp => resp.json()).then(({ products }) => {
+        productsData = products
+        let str=" "
+        productsData.forEach((product,index) => {
+            const card =createProductCard(product,index)
+             str+=card
         });
-    }
-    
-    const cart = new Cart();
-    cart.initCart();
-     
-    if(cartList){        
-        cartList.addEventListener('click', (e) => {
-            const target = e.target
-            let index
-            if (target.matches('.js-adder')) {
-              index = target.dataset.adder
-              cart.btnAddItem(index);
-            }
-            if (target.matches('.js-minuser')) {
-              index = target.dataset.minuser
-              cart.btnMinuserItem(index);
-            }
-            if (target.matches('#js-btn')) {
-              const isConfirm = confirm('確定要刪除嗎？')
-              index = target.dataset.btn
-              const pid = target.dataset.pid*1
-              if (isConfirm) {
-              cart.deleteItem(index,pid);
-              }
-            }    
-        })
-    } 
-    
-    
-    let dataAll
-    const formId=document.querySelector(`#form-id`)
-    const citySelect=document.querySelector(`#city-select`)
-    const cityArea=document.querySelector(`#city-area`)
-    
-   function formSelect(data){
-        citySelect.innerHTML=
-        data.map((item,idx)=>`<option value="${idx}">${item.name}</option>`).join('')
-        citySelect.addEventListener('change',(e)=>{
-         setCity(e.target.value)
-         
-        }) 
-        // const opts=citySelect.getElementsByTagName("option")
-        // opts[17].selected=true
-    
-       citySelect.value=17
-       setCity(17)
+        
+        if(productRow){
+            productRow.innerHTML=str; 
+        }
 
-   } 
-   function setCity(num){
-    cityArea.innerHTML=dataAll[num].districts.map((item,idx)=>`<option value="${idx}">${item.name}</option>`).join('')
-   }
-   if(formId){
-    fetch('./api/taiwan_districts.json').then(resp => resp.json()).then(({ data }) => {
-       dataAll=data   
-       formSelect(dataAll)
+        productRow.addEventListener('click', (e) => {
+            if(e.target.dataset.addbtn){
+                const cartId=e.target.dataset.cart*1  
+                cart.addItem(e.target.dataset.addbtn,cartId)
+            }
+        }); 
     });
-   }
-
-  // const formInput = document.querySelector(`.form-input-group`);
-    // formId.forEach(input=>{
-    //  input.addEventListener('submit',function(){
-    //     if (input.checkValidity()) {
-    //      input.cartList.add('valid')
-    //     //  input.cartList.remove('invalid')
-    //     }else{
-    //         input.cartList.remove('valid')
-    //         // input.cartList.add('invalid')  
-    //     }
-    //    })  
-    //    })  
+}
+    
+const cart = new Cart();
+cart.initCart();
+     
+if(cartList){        
+    cartList.addEventListener('click', (e) => {
+        const target = e.target
+        let index
+        if (target.matches('.js-adder')) {
+            index = target.dataset.adder
+            cart.btnAddItem(index);
+        }
+        if (target.matches('.js-minuser')) {
+            index = target.dataset.minuser
+            cart.btnMinuserItem(index);
+        }
+        if (target.matches('#js-btn')) {
+            const isConfirm = confirm('確定要刪除嗎？')
+            index = target.dataset.btn
+            const pid = target.dataset.pid*1
+            if (isConfirm) {
+            cart.deleteItem(index,pid);
+            }
+        }    
+    })
+}    

@@ -266,7 +266,7 @@ $color in $arr {
 
         &:before {
             border-color: $secondary;
-            background: $secondary;
+            background: $primary;
             box-shadow: 0 0 0 3px #fff inset;
         }
     }

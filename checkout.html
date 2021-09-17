@@ -40,8 +40,9 @@
         <div class="row mt-2 ">
             <div class="col-md-8">
                 <form class="ff-ping-fang-tc-semibold" id="form-id" action="">
+                <fieldset>
                     <div class="row mx-0 bg-primary text-secondary page-container py-4 px-4">
-                        <div class="col-6 fz-36px">運送</div>
+                        <legend class="col-6 fz-36px">運送</legend>
                         <div class="col-6 d-flex justify-content-between align-items-center">
                             <div class="rounded-circle border border-secondary w-3 h-3 d-flex justify-content-center align-items-center ">
                                 <div class="rounded-circle border border-secondary w-2 h-2 bg-secondary"></div>
@@ -53,36 +54,56 @@
                                  <div class="rounded-circle border border-secondary w-2 h-2"></div>
                             </div>
                         </div>
-                        <div class="col-6 pr-4px ">
+                        <div class="col-6 form-item pr-4px ">
                             <label for="lastname" class="d-block pb-1 mt-4 fz-20px ">姓氏</label>
-                            <input type="text" id="lastname" class=" px-2 bg-secondary h-7   w-100" title="姓氏" name="lastname" maxlength="10" placeholder="王" required>
+                            <input type="text" id="lastname" class=" px-2 bg-secondary h-7   w-100" name="lastname" maxlength="10" placeholder="王" required>
                         </div>
-                        <div class="col-6 pl-4px">
+                        <div class="col-6 form-item pl-4px">
                             <label for="firstname" class="d-block pb-1 mt-4 fz-20px ">名字</label>
-                            <input type="text" id="firstname" class="px-2 bg-secondary h-7  w-100" title="名字" name="firstname" maxlength="10" placeholder="小明" required>
+                            <input type="text" id="firstname" class="px-2 bg-secondary h-7  w-100" name="firstname" maxlength="10" placeholder="小明" required>
                         </div>
-                        <div class="col">
+                        <div class="col form-item">
                             <label for="phone" class="d-block pb-1 mt-2 fz-20px">電話</label>
-                            <input  type="text" id id="phone" class="px-2 bg-secondary h-7  w-100" title="電話" name="phone" maxlength="10" placeholder="0912-345-678" required>
+                            <input type="text" id="phone" class="px-2 bg-secondary h-7  w-100" name="phone" maxlength="10" placeholder="07-0000000 or 0912-345678" required>
+                        </div>
+                        <div class="col-12 form-item mt-2">
+                            <fieldset>
+                                <legend class="d-block pb-1 mt-2 fz-20px">運送時段</legend>
+                                <ul class="d-flex">
+                                    <li class="mr-2">
+                                        <input type="radio" name="time" id="time-1" class="hide-switch" required>
+                                        <label for="time-1" class="btn btn-select radio">上午</label>
+                                    </li>
+                                    <li class="mr-2">
+                                        <input type="radio" name="time" id="time-2" class="hide-switch" required>
+                                        <label for="time-2" class="btn btn-select radio">下午</label>
+                                    </li>
+                                    <li class="mr-2">
+                                        <input type="radio" name="time" id="time-3" class="hide-switch" required>
+                                        <label for="time-3" class="btn btn-select radio">晚上</label>
+                                    </li>
+                                </ul> 
+                            </fieldset>
+
                         </div>
                         <div class="col-12">
                             <label for="address" class="d-block pb-1 mt-2 fz-20px">地址</label>
                         </div>
                         <div class="col-6 pr-4px">
-                            <select name="city" id="city-select"  class=" w-100 h-7 bg-secondary text-color-matcha mb-1 ">
-                                <!-- <option value=""></option> -->
+                            <select name="city" id="city-select"  class=" w-100 h-7 bg-secondary text-color-matcha mb-1">
                             </select>
-                    </div>
-            <div class="col-6 pl-4px">
-                <select name="cityarea" id="city-area" class=" w-100 h-7 bg-secondary text-color-matcha mb-1">
-                    <option value=""></option>
-                </select>
-            </div>
-            <div class="col">
-                <input type="text" id="address" class="px-2 bg-secondary h-7  w-100" title="地址" name="address" placeholder="幸福路 520 號" required>
-            </div>
+                        </div>
+                        <div class="col-6 pl-4px">
+                             <select name="cityarea" id="city-area" class=" w-100 h-7 bg-secondary text-color-matcha mb-1">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col form-item">
+                            <input type="text" id="address" class="px-2 bg-secondary h-7  w-100" name="address" placeholder="幸福路 520 號" required>
+                         </div>
                     </div>
                     <input class="submit text-primary bg-yellow text-center w-100 h-8 fz-24px ff-ping-fang-tc-semibold" type="submit" value="下一步">
+                </fieldset>
                 </form>  
             </div>
             <aside id="cart-order" class="d-none d-md-block col-md-4 ff-ping-fang-tc-semibold text-primary text-center fz-24px">
@@ -168,10 +189,11 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+   
 
-	<script src="./js/global.js"></script>
-    <script src="./js/ex.js"></script>
-    <!-- <script src="./js/app.min.js"></script> -->
+	<!-- <script src="./js/global.js"></script> -->
+    <script src="./js/alone/checkout.min.js"></script>
+    <script src="./js/app.min.js"></script>
 </div>
 </body>
 </html>

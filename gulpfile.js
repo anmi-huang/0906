@@ -19,9 +19,13 @@ const bulkSass = require('gulp-sass-bulk-import');
 const path = require('path');
 const clean = require('gulp-clean');
 const savefile = require('gulp-savefile');
+const noop = require('gulp-noop');
+
 const LIVERELOAD_FILES_PATH = ['./js/app.min.js', './js/alone/*.min.js', './**/*.html', "./assets/**/*.svg", "./assets/css/*.css"];
 const SCRIPTS_BUNDLE_PATH = ['./js/**/*.js', '!./js/**/*.min.js', '!./js/alone/*.js', '!./js/app.min.js'];
 const FONT_NAME = 'iconfont';
+let env = 'development'
+
 
 const cleanTmpCss = () => {
     return gulp.src('./assets/css/*', { read: false })
@@ -68,7 +72,7 @@ const tmpCssBundle = () => {
             "./assets/css/tmp/**/*.css",
             "./assets/css/tmp/partials/utility.css",
         ])
-        .pipe(sourcemaps.init())
+        .pipe(env === 'development'? sourcemaps.init():noop())
         .pipe(concat('app.css'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./assets/css'))
@@ -121,6 +125,7 @@ const scriptsBundle = () => {
             "./js/*.js",
             "!./js/app.min.js"
         ])
+        .pipe(env === 'development'? sourcemaps.init():noop())
         .pipe(
             babel({
                 "presets": [
@@ -128,9 +133,9 @@ const scriptsBundle = () => {
                 ]
             })
         )
-        .pipe(browserify())
         .pipe(uglify())
         .pipe(concat('app.min.js'))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('./js'))
 };
 
@@ -156,15 +161,33 @@ const tmpCssBundleCompress = () => {
 
 const scriptsAloneMinify = (file) => {
     return gulp.src(file, { allowEmpty: true })
+        .pipe(env === 'development'? sourcemaps.init():noop())
+        .pipe(
+            babel({
+                "presets": [
+                    ["@babel/preset-env"]
+                ]
+            })
+        )
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('./js/alone'))
 };
 
 const scriptsAloneMinifyAll = () => {
     return gulp.src(['./js/alone/**/*.js', '!./js/alone/**/*.min.js'])
+        .pipe(env === 'development'? sourcemaps.init():noop())
+        .pipe(
+            babel({
+                "presets": [
+                    ["@babel/preset-env"]
+                ]
+            })
+        )
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('./js/alone'))
 };
 
@@ -211,10 +234,24 @@ const watchFiles = () => {
 
 };
 
+const setEnvDev = () => {
+    env = 'development'
+    return gulp.src('./js/global.js')
+        .pipe(noop())
+        .pipe(gulp.dest('./js'))
+}
+const setEnvProd = () => {
+    env = 'production'
+    return gulp.src('./js/global.js')
+        .pipe(noop())
+        .pipe(gulp.dest('./js'))
+}
+
+
 const defaultStep01 = series(cleanTmpCss, parallel(makeIconfont, sprite, sassBootstrap))
 const defaultStep02 = parallel(sassTmp /*, scriptsLibsBundle*/ )
 const defaultStep03 = parallel(sassAloneAll, scriptsAloneMinifyAll, scriptsBundle, tmpCssBundle)
 
-gulp.task('_default', series(defaultStep01, defaultStep02, defaultStep03, watchFiles))
-gulp.task('_sass-minify', series(defaultStep01, parallel(sassTmpCompress, sassAloneAll), tmpCssBundleCompress))
-gulp.task('_scripts-minify', series( /*scriptsLibsBundle, */ scriptsBundle, scriptsUglify, scriptsAloneMinifyAll))
+gulp.task('_default', series(setEnvDev, defaultStep01, defaultStep02, defaultStep03, watchFiles))
+gulp.task('_sass-minify', series(setEnvProd, defaultStep01, parallel(sassTmpCompress, sassAloneAll), tmpCssBundleCompress))
+gulp.task('_scripts-minify', series(setEnvProd, /*scriptsLibsBundle, */ scriptsBundle, scriptsUglify, scriptsAloneMinifyAll))

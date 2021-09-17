@@ -67,19 +67,17 @@
                             <div class="pt-2">總計</div>
                             <div id="js-sum" class="pt-2 text-right"></div>
                         </div>
-                    </div>    
-                    <div class="d-none d-md-block  bg-yellow  text-center py-2 fz-24px ff-ping-fang-tc-semibold">
-                            <a href="./checkout.html" class="text-primary text-decoration-none ">結帳</a>
-                    </div>
+                    </div> 
+                    <a class="d-none d-md-block  bg-yellow  text-center py-2 mb-8 fz-24px ff-ping-fang-tc-semibold text-primary text-decoration-none" 
+                     onclick="{if(confirm('確定要結帳了嗎?')){window.location='./checkout.html';return true;}return false;}">結帳</a>                   
                 </div>
             </aside>
         </div>
     </div>
 
     <footer id="footer" class="">
-    <div class="d-block d-md-none  bg-yellow  text-center py-2 fz-24px ff-ping-fang-tc-semibold">
-            <a href="./checkout.html" class="text-primary text-decoration-none ">結帳</a>
-    </div>   
+        <a href="./checkout.html" class="d-block d-md-none  bg-yellow  text-center py-2 fz-24px ff-ping-fang-tc-semibold text-primary text-decoration-none "
+        onclick="{if(confirm('確定要結帳了嗎?')){window.location='./checkout.html';return true;}return false;}">結帳</a> 
     <div class="footer-list bg-primary text-white text-center w-100 py-4 ">
         <div class="px-2">
             <div class="row">
@@ -136,8 +134,8 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
 
-	<script src="./js/global.js"></script>
-    <!-- <script src="./js/app.min.js"></script> -->
+	<!-- <script src="./js/global.js"></script> -->
+    <script src="./js/app.min.js"></script>
 </div>
 </body>
 </html>
