@@ -1,16 +1,13 @@
-
 $.validator.setDefaults({
   submitHandler: function() {
-      alert("提交地址!");
+      alert("提交運送表單!");
   }
 });
 
 $.validator.messages.required="此欄位為必填！！"
-
 $.validator.addMethod(
   "isPhone",
   function(value,element){
-    var length = value.length
     var mobile = /^09\d{2}\d{6}$/
     var tel = /^0\d{1,2}\d{6,8}$/
     return (
@@ -22,7 +19,6 @@ $.validator.addMethod(
 
 $().ready(function() {  
   $("#form-id").validate({
-    
     errorPlacement: function(error, element) {
       error.appendTo(element.parents('.form-item'))
     }, 
@@ -40,7 +36,7 @@ $().ready(function() {
 });
 
 let dataAll
-const data =  
+const dataList =  
 [  
     {
         "districts": [
@@ -1663,7 +1659,7 @@ const formId=document.querySelector(`#form-id`)
 const citySelect=document.querySelector(`#city-select`)
 const cityArea=document.querySelector(`#city-area`)
 
-dataAll=data   
+dataAll=dataList   
 formSelect(dataAll)
 
 function formSelect(data){
@@ -1672,12 +1668,11 @@ function formSelect(data){
     citySelect.addEventListener('change',(e)=>{
     setCity(e.target.value)
     }) 
-
-function setCity(num){
-    cityArea.innerHTML=
-    dataAll[num].districts.map((item,idx)=>`<option value="${idx}">${item.name}</option>`).join('')
-  }     
    citySelect.value=17
    setCity(17)
 } 
 
+function setCity(num){
+  cityArea.innerHTML=
+  dataAll[num].districts.map((item,idx)=>`<option value="${idx}">${item.name}</option>`).join('')
+} 

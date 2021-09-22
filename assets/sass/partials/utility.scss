@@ -349,7 +349,7 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
 
 .list-group-item-action{
     .active{
-     background-color: $secondary;
+        background-color: $secondary;
      }
 }
 
@@ -374,6 +374,7 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
        letter-spacing:5px;
    }
 }
+
 .email{
      &:before {
         font-family: "Font Awesome 5 Free"; 
@@ -410,6 +411,7 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
         height: 106px;
     }
 }
+
 .btn-active{
     &:hover{
     background-color: $secondary ;
@@ -440,6 +442,7 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
     background-color: $primary;
     }
 }
+
 .p-order{
     @include media-breakpoint-up(md){
     padding:0 1rem 1rem;
@@ -454,6 +457,7 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
      border-bottom: 1px  solid $secondary !important;
     }
 } 
+
 .btn-add{
 &:hover{
     color:$secondary !important;
@@ -471,18 +475,18 @@ $fontsize-list: (12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 34,
 }
 
 .text-color-matcha{
-color: #8DA291 !important;
+    color: #8DA291 !important;
 }
 
 ::placeholder {
     color: #8DA291;
 }
-::-webkit-input-placeholder { /* Chrome, Safari */
-    color: #8DA291;
-}
-:-ms-input-placeholder { /* IE 10+ */
-    color: #8DA291;
-}
+// ::-webkit-input-placeholder { /* Chrome, Safari */
+//     color: #8DA291;
+// }
+// :-ms-input-placeholder { /* IE 10+ */
+//     color: #8DA291;
+// }
 
 select {
     text-indent: 16px;
@@ -499,6 +503,13 @@ select {
         padding: 0;
     }
 }
+
 .valid{
     color: black !important;
+}
+
+.m-checkbtn{
+    @include media-breakpoint-up(md){
+        margin-bottom: 64px;
+    }
 }

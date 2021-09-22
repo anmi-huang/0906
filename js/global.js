@@ -9,7 +9,6 @@ const cartList=document.querySelector(`#cart-list`)
 const jsProductRow=document.querySelector(`.js-product-row`)
 const productRow = document.querySelector('#product-row')
 const jsProductBtn = document.querySelector('#js-product-btn')
- 
 const shoppingList = document.querySelector('#shopping-list')
 
 function createProductCard(product,index) {
@@ -43,7 +42,6 @@ function createProductCard(product,index) {
 
 function Cart() {
     this.key ='example-cart';
-    this.key2 ='example-cart2';
     this.itemList = [];
     this.initCart = function () {
         const localDataString = localStorage.getItem(this.key);
@@ -116,6 +114,7 @@ function Cart() {
         document.querySelector(`#js-value-${i}`).innerHTML =`NT$ ${this.itemList[i].amount*this.itemList[i].price}`
         this.updateTotal();
     }
+
     this.cartNumberRender =function (){
         cartNumber.innerHTML=`
         <span class="cart-number-size rounded-circle w-5 h-5 position-absolute text-center text-primary bg-secondary fz-24"> 
@@ -130,7 +129,7 @@ function Cart() {
         let cartSum = 0;
         let fee=300;
         let str;
-        let shp;
+        let shpStr;
         this.itemList.forEach(function (item, idx) {
             const itemValue = item.price * item.amount
             cartValue += itemValue;
@@ -160,7 +159,7 @@ function Cart() {
                     <div  id="js-value-${idx}" class="price-border col-md-10 fz-20px py-1 border border-secondary border-right-0 border-left-0  text-right text-md-left ">
                     NT$ ${itemValue}
                     </div>
-                    <button id="js-btn" class="col-md-2 d-none d-md-block text-right pr-0 " data-btn="${idx}" data-pid="${item.id}" ><img src="./img/trash.svg" alt=""class="pointer-events-none w-2">
+                    <button id="js-btn" class="col-md-2 d-none d-md-block text-right px-1" data-btn="${idx}" data-pid="${item.id}" ><img src="./img/trash.svg" alt=""class="pointer-events-none w-2">
                     </button>
             </div> 
         </li>
@@ -183,9 +182,9 @@ function Cart() {
         if(cartList){
             cartList.innerHTML+=str;
         }
-        shp=list
+        shpStr=list
         if(shoppingList){
-            shoppingList.innerHTML+=shp;
+            shoppingList.innerHTML+=shpStr;
         }
       
     });
